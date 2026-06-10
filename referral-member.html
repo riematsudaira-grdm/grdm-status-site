@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GRDMご紹介会員プログラム</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --text: #1f2937;
+      --muted: #667085;
+      --line: #d8e0ea;
+      --navy: #153a6b;
+      --navy-2: #1f5aa6;
+      --accent: #9b7a38;
+      --accent-2: #eef5ff;
+      --shadow: 0 12px 28px rgba(15, 43, 84, .08);
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+      line-height: 1.75;
+    }
+    a { color: var(--navy-2); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .page { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; padding: 24px 0 56px; }
+    .hero {
+      padding: 42px 34px;
+      border-radius: 22px;
+      color: #fff;
+      background: linear-gradient(135deg, #16345f 0%, #2a67b6 100%);
+      box-shadow: var(--shadow);
+    }
+    .hero__tag {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 4px 10px;
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 999px;
+      font-size: 12px;
+      letter-spacing: .08em;
+    }
+    .hero h1 { margin: 0 0 10px; font-size: clamp(30px, 4vw, 44px); line-height: 1.25; }
+    .hero__copy { margin: 0 0 14px; font-size: clamp(18px, 2vw, 22px); font-weight: 700; }
+    .hero__lead { max-width: 860px; margin: 0; opacity: .95; }
+
+    .nav {
+      position: sticky; top: 0; z-index: 10;
+      margin: 18px 0 24px;
+      padding: 10px;
+      display: flex; flex-wrap: wrap; gap: 8px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--line);
+      box-shadow: 0 8px 16px rgba(17, 24, 39, .05);
+    }
+    .nav a {
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .nav a:hover { background: #ecf4ff; text-decoration: none; }
+
+    .section {
+      margin-top: 20px;
+      padding: 28px;
+      border-radius: 20px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+    .section h2 { margin: 0 0 8px; color: var(--navy); font-size: 28px; }
+    .section h3 { margin: 24px 0 10px; font-size: 20px; }
+    .lead { color: var(--muted); margin: 0; }
+
+    .pill-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #f3f7fc;
+      border: 1px solid #dbe6f2;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .cards {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .card {
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, #fff, #f9fbfd);
+      min-height: 170px;
+    }
+    .card h3 { margin: 8px 0 8px; font-size: 18px; }
+    .card p { margin: 0; color: var(--muted); font-size: 14px; }
+    .label {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      background: var(--navy-2);
+    }
+
+    .cols {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(280px, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+    .box {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fbfdff;
+    }
+    .box h3 { margin-top: 0; }
+
+    .table-wrap { overflow-x: auto; margin-top: 16px; border: 1px solid var(--line); border-radius: 16px; }
+    table { width: 100%; border-collapse: collapse; min-width: 720px; }
+    caption { caption-side: top; text-align: left; font-weight: 700; padding: 16px 16px 0; }
+    th, td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; font-size: 14px; }
+    thead th { background: #f7fafc; color: var(--navy); font-weight: 800; }
+    tbody th { background: #fcfdff; min-width: 160px; }
+    tbody tr:last-child th, tbody tr:last-child td { border-bottom: none; }
+
+    .message {
+      margin-top: 16px;
+      padding: 16px 18px;
+      border-radius: 14px;
+      background: var(--accent-2);
+      border: 1px solid #d9e8fb;
+      font-size: 14px;
+    }
+    .message strong { color: var(--navy); }
+    .notes { padding-left: 20px; margin: 12px 0 0; }
+    .notes li { margin-bottom: 8px; }
+    .cta {
+      margin-top: 16px;
+      padding: 20px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #f5f9ff 0%, #edf4ff 100%);
+      border: 1px solid #d6e4f8;
+    }
+    .cta h3 { margin-top: 0; }
+    .footer { margin-top: 18px; text-align: center; font-size: 13px; color: var(--muted); }
+
+    @media (max-width: 920px) {
+      .cards { grid-template-columns: 1fr; }
+      .cols { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 720px) {
+      .page { width: min(calc(100% - 20px), var(--max)); padding-top: 14px; }
+      .hero { padding: 30px 20px; }
+      .section { padding: 22px 16px; }
+      .nav { position: static; }
+      .section h2 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <span class="hero__tag">REFERRAL MEMBER PROGRAM</span>
+      <h1>GRDMご紹介会員プログラム</h1>
+      <p class="hero__copy">ご紹介のつながりが、新たな価値になる。</p>
+      <p class="hero__lead">
+        GRDMご紹介会員プログラムは、未購入の方でもご参加いただける会員制度です。
+        ご紹介いただいたお客様のご契約・ご決済時に加え、その後の買い増し購入時にも、ご紹介特典をご用意しています。
+      </p>
+    </header>
+
+    <nav class="nav" aria-label="ページ内ナビゲーション">
+      <a href="#about">プログラム概要</a>
+      <a href="#merits">参加メリット</a>
+      <a href="#fee">ご紹介特典</a>
+      <a href="#flow">ご利用イメージ</a>
+      <a href="#owner">オーナー会員について</a>
+      <a href="#notes">ご案内</a>
+    </nav>
+
+    <section class="section" id="about">
+      <h2>プログラム概要</h2>
+      <p class="lead">
+        GRDMご紹介会員プログラムは、当社でまだ物件をご購入されていない方でもご参加いただける制度です。
+        大切なご家族・ご友人・お知り合いをご紹介いただくことで、ご紹介特典をお受け取りいただけます。
+      </p>
+      <div class="pill-row">
+        <span class="pill">未購入でも参加可能</span>
+        <span class="pill">初回紹介フィーあり</span>
+        <span class="pill">買い増し時のリピートフィーあり</span>
+        <span class="pill">将来的なオーナー会員化も可能</span>
+      </div>
+    </section>
+
+    <section class="section" id="merits">
+      <h2>参加メリット</h2>
+      <p class="lead">ご紹介会員として参加いただくことで、次のようなメリットがあります。</p>
+      <div class="cards">
+        <article class="card">
+          <span class="label">MERIT 01</span>
+          <h3>未購入でも始められる</h3>
+          <p>当社で物件をご購入されていない方でも、ご紹介会員として制度に参加できます。</p>
+        </article>
+        <article class="card">
+          <span class="label">MERIT 02</span>
+          <h3>ご紹介時に特典がある</h3>
+          <p>ご紹介先のお客様が初めて物件を購入・決済された場合、ご紹介特典の対象となります。</p>
+        </article>
+        <article class="card">
+          <span class="label">MERIT 03</span>
+          <h3>継続的なメリットにつながる</h3>
+          <p>ご紹介先のお客様が2件目以降の買い増し購入をされた場合も、リピートフィーの対象となります。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="fee">
+      <h2>ご紹介特典</h2>
+      <p class="lead">
+        ご紹介会員の皆さまには、当社所定の条件に基づき、ご紹介特典をご用意しています。
+      </p>
+
+      <div class="cols">
+        <div class="box">
+          <h3>初回紹介フィー</h3>
+          <p>ご紹介したお客様が、当社で初めて物件を購入・決済された場合に適用されます。</p>
+        </div>
+        <div class="box">
+          <h3>リピートフィー</h3>
+          <p>ご紹介したお客様が、2件目以降の買い増し購入をされ、決済に至った場合に適用されます。</p>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <caption>ご紹介特典一覧（金額あり版）</caption>
+          <thead>
+            <tr>
+              <th scope="col">区分</th>
+              <th scope="col">初回紹介フィー</th>
+              <th scope="col">リピートフィー</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">ご紹介会員</th>
+              <td>個別条件に応じてご案内</td>
+              <td>個別条件に応じてご案内</td>
+            </tr>
+            <tr>
+              <th scope="row">オーナー会員（参考）</th>
+              <td>50万円〜200万円</td>
+              <td>5万円〜50万円</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="message">
+        <strong>補足</strong><br />
+        ご紹介会員向けの特典水準は、適用条件やご紹介内容に応じて個別にご案内します。より詳しいご案内をご希望の場合は、担当者までお問い合わせください。
+      </div>
+    </section>
+
+    <section class="section" id="flow">
+      <h2>ご利用イメージ</h2>
+      <p class="lead">ご紹介会員としての流れはシンプルです。</p>
+      <div class="cols">
+        <div class="box">
+          <h3>STEP 1</h3>
+          <p>ご家族・ご友人・お知り合いをご紹介</p>
+        </div>
+        <div class="box">
+          <h3>STEP 2</h3>
+          <p>ご紹介先のお客様が当社とご相談・ご契約</p>
+        </div>
+        <div class="box">
+          <h3>STEP 3</h3>
+          <p>ご決済時に初回紹介フィーの対象</p>
+        </div>
+        <div class="box">
+          <h3>STEP 4</h3>
+          <p>買い増し購入時にはリピートフィーの対象</p>
+        </div>
+      </div>
+      <div class="cta">
+        <h3>一度きりではない、ご紹介の価値</h3>
+        <p>
+          ご紹介のメリットは、最初のご契約だけでは終わりません。ご紹介先のお客様が継続して資産形成を進められた場合も、リピートフィーとしてつながっていく仕組みです。
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="owner">
+      <h2>オーナー会員について</h2>
+      <p class="lead">
+        当社で物件をご購入いただくと、GRDMオーナーステータスプログラムの対象となり、保有件数に応じた優遇サービスをご利用いただけます。
+      </p>
+      <div class="message">
+        <strong>オーナー会員になると広がる特典</strong><br />
+        専任担当、新規物件の優先案内、年次資産レポート、限定交流会、特別招待など、オーナー会員向けの優遇サービスをご用意しています。
+      </div>
+      <p style="margin-top:14px;">
+        オーナー会員向けプログラムは、<a href="owner-status.html">GRDMオーナーステータスプログラム</a>よりご覧いただけます。
+      </p>
+    </section>
+
+    <section class="section" id="notes">
+      <h2>ご案内</h2>
+      <ul class="notes">
+        <li>本プログラムの内容、適用条件、特典内容は、当社所定の基準に基づきます。</li>
+        <li>ご紹介特典の適用には、当社による条件確認および対象判定が必要となります。</li>
+        <li>オーナー会員向けの優遇サービスは、当社から物件をご購入いただいている会員の方が対象です。</li>
+        <li>制度内容は、予告なく変更となる場合があります。</li>
+      </ul>
+    </section>
+
+    <footer class="footer">
+      <p>© GRDM Referral Member Program</p>
+    </footer>
+  </main>
+</body>
+</html>
