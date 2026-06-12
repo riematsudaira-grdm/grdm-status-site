@@ -17,6 +17,9 @@
       --sapphire: #135fae;
       --diamond: #42536f;
       --metal: #656f7e;
+      --warn-bg: #fff7e8;
+      --warn-line: #f0d39a;
+      --warn-text: #7a5614;
       --shadow: 0 12px 28px rgba(15, 43, 84, .08);
       --max: 1180px;
     }
@@ -31,7 +34,11 @@
     a { color: var(--navy-2); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    .page { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; padding: 24px 0 56px; }
+    .page {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+      padding: 24px 0 56px;
+    }
 
     .hero {
       padding: 42px 34px;
@@ -49,15 +56,31 @@
       font-size: 12px;
       letter-spacing: .08em;
     }
-    .hero h1 { margin: 0 0 10px; font-size: clamp(30px, 4vw, 44px); line-height: 1.25; }
-    .hero__copy { margin: 0 0 14px; font-size: clamp(18px, 2vw, 22px); font-weight: 700; }
-    .hero__lead { max-width: 860px; margin: 0; opacity: .95; }
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: clamp(30px, 4vw, 44px);
+      line-height: 1.25;
+    }
+    .hero__copy {
+      margin: 0 0 14px;
+      font-size: clamp(18px, 2vw, 22px);
+      font-weight: 700;
+    }
+    .hero__lead {
+      max-width: 860px;
+      margin: 0;
+      opacity: .95;
+    }
 
     .nav {
-      position: sticky; top: 0; z-index: 10;
+      position: sticky;
+      top: 0;
+      z-index: 10;
       margin: 18px 0 24px;
       padding: 10px;
-      display: flex; flex-wrap: wrap; gap: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
       border-radius: 16px;
       background: rgba(255,255,255,.92);
       backdrop-filter: blur(8px);
@@ -71,7 +94,10 @@
       font-weight: 700;
       color: var(--navy);
     }
-    .nav a:hover { background: #ecf4ff; text-decoration: none; }
+    .nav a:hover {
+      background: #ecf4ff;
+      text-decoration: none;
+    }
 
     .section {
       margin-top: 20px;
@@ -81,11 +107,26 @@
       border: 1px solid var(--line);
       box-shadow: var(--shadow);
     }
-    .section h2 { margin: 0 0 8px; color: var(--navy); font-size: 28px; }
-    .section h3 { margin: 24px 0 10px; font-size: 20px; }
-    .lead { color: var(--muted); margin: 0; }
+    .section h2 {
+      margin: 0 0 8px;
+      color: var(--navy);
+      font-size: 28px;
+    }
+    .section h3 {
+      margin: 24px 0 10px;
+      font-size: 20px;
+    }
+    .lead {
+      color: var(--muted);
+      margin: 0;
+    }
 
-    .pill-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
     .pill {
       padding: 10px 14px;
       border-radius: 999px;
@@ -96,7 +137,29 @@
       color: var(--navy);
     }
 
-    /* ステータスカード */
+    .glossary {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    .glossary__item {
+      padding: 18px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: #fbfdff;
+    }
+    .glossary__item h4 {
+      margin: 0 0 6px;
+      color: var(--navy);
+      font-size: 16px;
+    }
+    .glossary__item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
     .cards {
       margin-top: 18px;
       display: grid;
@@ -110,8 +173,15 @@
       min-height: 176px;
       background: linear-gradient(180deg, #fff, #f9fbfd);
     }
-    .card h3 { margin: 8px 0 8px; font-size: 18px; }
-    .card p { margin: 0; color: var(--muted); font-size: 14px; }
+    .card h3 {
+      margin: 8px 0 8px;
+      font-size: 18px;
+    }
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
     .label {
       display: inline-block;
       padding: 4px 10px;
@@ -131,27 +201,6 @@
     .label.diamond-l { background: var(--diamond); }
     .label.metal-l { background: var(--metal); }
 
-    /* 用語解説ボックス */
-    .glossary {
-      margin-top: 18px;
-      display: grid;
-      grid-template-columns: repeat(2, minmax(260px, 1fr));
-      gap: 14px;
-    }
-    .glossary__item {
-      padding: 18px;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      background: #fbfdff;
-    }
-    .glossary__item h4 {
-      margin: 0 0 6px;
-      color: var(--navy);
-      font-size: 16px;
-    }
-    .glossary__item p { margin: 0; color: var(--muted); font-size: 14px; }
-
-    /* 4経路 図解 */
     .routes {
       margin-top: 18px;
       display: grid;
@@ -163,13 +212,13 @@
       border-radius: 18px;
       border: 1px solid var(--line);
       background: linear-gradient(180deg, #ffffff, #f5f9ff);
-      position: relative;
     }
     .route__num {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 28px; height: 28px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
       background: var(--navy);
       color: #fff;
@@ -177,9 +226,16 @@
       font-size: 14px;
       margin-bottom: 8px;
     }
-    .route h4 { margin: 0 0 6px; color: var(--navy); font-size: 16px; }
-    .route p { margin: 0; color: var(--muted); font-size: 14px; }
-
+    .route h4 {
+      margin: 0 0 6px;
+      color: var(--navy);
+      font-size: 16px;
+    }
+    .route p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
     .or-banner {
       margin-top: 14px;
       padding: 12px 18px;
@@ -205,15 +261,47 @@
     }
     .box h3 { margin-top: 0; }
 
-    /* テーブル */
-    .table-wrap { overflow-x: auto; margin-top: 16px; border: 1px solid var(--line); border-radius: 16px; }
-    table { width: 100%; border-collapse: collapse; min-width: 760px; }
-    caption { caption-side: top; text-align: left; font-weight: 700; padding: 16px 16px 0; }
-    th, td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; font-size: 14px; }
-    thead th { background: #f7fafc; color: var(--navy); font-weight: 800; }
-    tbody th { background: #fcfdff; min-width: 160px; }
-    tbody tr:last-child th, tbody tr:last-child td { border-bottom: none; }
-    td.num { text-align: right; white-space: nowrap; }
+    .table-wrap {
+      overflow-x: auto;
+      margin-top: 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 920px;
+    }
+    caption {
+      caption-side: top;
+      text-align: left;
+      font-weight: 700;
+      padding: 16px 16px 0;
+    }
+    th, td {
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      font-size: 14px;
+    }
+    thead th {
+      background: #f7fafc;
+      color: var(--navy);
+      font-weight: 800;
+    }
+    tbody th {
+      background: #fcfdff;
+      min-width: 170px;
+    }
+    tbody tr:last-child th,
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+    td.num {
+      text-align: right;
+      white-space: nowrap;
+    }
 
     .message {
       margin-top: 16px;
@@ -225,7 +313,17 @@
     }
     .message strong { color: var(--navy); }
 
-    /* フロー図解 */
+    .message--strong {
+      background: var(--warn-bg);
+      border: 2px solid var(--warn-line);
+      color: var(--warn-text);
+      box-shadow: 0 8px 18px rgba(122, 86, 20, .08);
+    }
+    .message--strong strong {
+      color: var(--warn-text);
+      font-size: 15px;
+    }
+
     .flow {
       margin-top: 18px;
       display: grid;
@@ -238,6 +336,7 @@
       border: 1px solid var(--line);
       background: #ffffff;
       position: relative;
+      min-height: 190px;
     }
     .flow__step::after {
       content: "→";
@@ -260,8 +359,34 @@
       font-weight: 700;
       margin-bottom: 8px;
     }
-    .flow__step h4 { margin: 0 0 4px; font-size: 16px; color: var(--navy); }
-    .flow__step p { margin: 0; font-size: 13px; color: var(--muted); }
+    .flow__step h4 {
+      margin: 0 0 4px;
+      font-size: 16px;
+      color: var(--navy);
+    }
+    .flow__step p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .flow-note {
+      margin-top: 16px;
+      padding: 18px;
+      border-radius: 16px;
+      background: #f8fbff;
+      border: 1px solid #d4e3f6;
+    }
+    .flow-note h3 {
+      margin: 0 0 8px;
+      color: var(--navy);
+      font-size: 18px;
+    }
+    .flow-note p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
 
     .cta {
       margin-top: 18px;
@@ -272,7 +397,10 @@
     }
     .cta h3 { margin-top: 0; }
 
-    .notes { padding-left: 20px; margin: 12px 0 0; }
+    .notes {
+      padding-left: 20px;
+      margin: 12px 0 0;
+    }
     .notes li { margin-bottom: 8px; }
 
     .footer {
@@ -300,8 +428,6 @@
 </head>
 <body>
   <main class="page">
-
-    <!-- ヒーロー -->
     <header class="hero">
       <span class="hero__tag">OWNER STATUS PROGRAM</span>
       <h1>GRDMオーナーステータスプログラム</h1>
@@ -312,7 +438,6 @@
       </p>
     </header>
 
-    <!-- ナビ -->
     <nav class="nav" aria-label="ページ内ナビゲーション">
       <a href="#about">プログラム概要</a>
       <a href="#terms">用語のご案内</a>
@@ -325,12 +450,11 @@
       <a href="#notes">ご案内</a>
     </nav>
 
-    <!-- 概要 -->
     <section class="section" id="about">
       <h2>プログラム概要</h2>
       <p class="lead">
         GRDMオーナーステータスプログラムは、当社との累計取引件数（購入・買取）やご紹介実績に応じて、会員ステータスに応じた優遇サービスをご利用いただける制度です。
-        保有件数を増やしにくいお客様にも、ご紹介によって上位ステータスを目指していただける設計としています。
+        累計取引件数を増やしにくいお客様にも、ご紹介によって上位ステータスを目指していただける設計としています。
       </p>
       <div class="pill-row">
         <span class="pill">累計取引件数で昇格</span>
@@ -340,7 +464,6 @@
       </div>
     </section>
 
-    <!-- 用語 -->
     <section class="section" id="terms">
       <h2>用語のご案内</h2>
       <p class="lead">本プログラムでは、以下の用語を使用します。</p>
@@ -364,7 +487,6 @@
       </div>
     </section>
 
-    <!-- ステータス一覧 -->
     <section class="section" id="status">
       <h2>ステータス一覧</h2>
       <p class="lead">オーナー会員は、ご実績に応じて以下の5つのステータスに分かれます。</p>
@@ -397,7 +519,6 @@
       </div>
     </section>
 
-    <!-- 4つの昇格ルート（図解） -->
     <section class="section" id="routes">
       <h2>4つの昇格ルート</h2>
       <p class="lead">
@@ -418,7 +539,7 @@
         <div class="route">
           <span class="route__num">3</span>
           <h4>紹介人数</h4>
-          <p>ご紹介の結果、ご購入された方の人数。</p>
+          <p>ご紹介の結果、ご購入された方の人数。初回2件口購入でも1名としてカウントします。</p>
         </div>
         <div class="route">
           <span class="route__num">4</span>
@@ -431,7 +552,6 @@
       </div>
     </section>
 
-    <!-- ステータス基準（表） -->
     <section class="section" id="criteria">
       <h2>ステータス基準</h2>
       <p class="lead">
@@ -492,7 +612,7 @@
       <div class="message">
         <strong>判定ルール</strong><br />
         上記4つの基準は <strong>いずれかを満たした時点</strong> でステータスアップの対象となります。
-        借入枠などのご事情で件数を増やしにくいお客様も、ご紹介活動によって上位ステータスを目指していただけます。
+        累計取引件数を増やしにくいお客様も、ご紹介活動によって上位ステータスを目指していただけます。
       </div>
       <div class="message">
         <strong>10件以上のステータスについて</strong><br />
@@ -500,7 +620,6 @@
       </div>
     </section>
 
-    <!-- 優遇サービス -->
     <section class="section" id="benefits">
       <h2>優遇サービス一覧</h2>
       <p class="lead">上位ステータスになるほど、情報・サポート・体験の優遇が広がります。</p>
@@ -534,7 +653,6 @@
       <p class="lead" style="margin-top:12px;">※「△」は別途条件・上限・適用範囲があります。</p>
     </section>
 
-    <!-- ご紹介報酬 -->
     <section class="section" id="fee">
       <h2>ご紹介報酬</h2>
       <p class="lead">
@@ -549,7 +667,7 @@
         </div>
         <div class="box">
           <h3>リピートフィー</h3>
-          <p>ご紹介したお客様が、買い増しご購入を行い、決済に至った際にお支払いする報酬です。</p>
+          <p>ご紹介したお客様が、2件目以降の買い増しご購入を行い、決済に至った際にお支払いする報酬です。</p>
         </div>
       </div>
 
@@ -575,57 +693,61 @@
 
       <div class="message">
         <strong>2件口でご購入された場合の取り扱い</strong><br />
-        ご紹介先のお客様が初回のご購入で2件口（同時に2件）をご購入された場合、紹介人数としては1名カウントとし、紹介フィーは「初回紹介フィー1件分」をお支払いします。<br />
-        その後、3件目のご購入（買い増し）からは、所定条件に基づきリピートフィーの対象となります。
+        ご紹介先のお客様が初回のご購入で2件口（同時に2件）をご購入された場合、紹介人数としては1名カウントとし、初回紹介フィーは1件分をお支払いします。
+        その後の2件目以降の買い増しご購入は、所定条件に基づきリピートフィーの対象となります。
+      </div>
+    </section>
+
+    <section class="section" id="flow">
+      <h2>ご紹介の流れ</h2>
+      <p class="lead">高品質なご紹介と協力体制を前提とした、基本的な進行イメージです。</p>
+      <div class="flow">
+        <div class="flow__step">
+          <span class="flow__num">STEP 1</span>
+          <h4>候補者のご紹介</h4>
+          <p>ご家族・ご友人・同僚など、関心をお持ちの方をご紹介ください。ご紹介前にご関係性やご状況を共有いただくことで、その後のご案内がよりスムーズになります。</p>
+        </div>
+        <div class="flow__step">
+          <span class="flow__num">STEP 2</span>
+          <h4>面談機会の設定・同席協力</h4>
+          <p>ご紹介先との面談（商談）機会の設定にご協力いただきます。必要に応じて同席や体験談の共有など、信頼形成の橋渡しをお願いする場合があります。</p>
+        </div>
+        <div class="flow__step">
+          <span class="flow__num">STEP 3</span>
+          <h4>詳細説明・ご提案は当社が対応</h4>
+          <p>商品説明、条件説明、コンプライアンス対応、契約に関わるご案内は当社が行います。ご紹介者の方には、専門説明やクロージングそのものではなく、協力体制の継続をお願いする想定です。</p>
+        </div>
+        <div class="flow__step">
+          <span class="flow__num">STEP 4</span>
+          <h4>ご成約後も継続</h4>
+          <p>初回購入・決済で初回紹介フィーが発生し、その後の2件目以降の買い増しご購入では、リピートフィーの対象となります。</p>
+        </div>
       </div>
 
-      <div class="cta">
-        <h3>ご紹介の魅力</h3>
+      <div class="flow-note">
+        <h3>本制度が想定する「協力体制」について</h3>
         <p>
-          ご紹介は、一度きりではなく、ご紹介先のお客様が継続して資産形成を進められた場合にも、リピート報酬としてつながっていきます。
+          本制度は、一般的な「ご紹介だけ」で完結するものではなく、信頼関係のある方へのご紹介、面談機会づくり、必要に応じた同席や体験談の共有など、一定の協力体制を前提としています。
+          一方で、不動産に関する専門説明、法令・コンプライアンスに関わる案内、商品内容の詳細説明、契約条件の説明や最終判断の支援は、すべて当社が責任をもって対応します。
         </p>
       </div>
     </section>
 
-    <!-- ご紹介の流れ（図解） -->
-    <section class="section" id="flow">
-      <h2>ご紹介の流れ</h2>
-      <p class="lead">ご紹介から報酬発生までのイメージです。</p>
-      <div class="flow">
-        <div class="flow__step">
-          <span class="flow__num">STEP 1</span>
-          <h4>ご紹介</h4>
-          <p>ご家族・ご友人・同僚など、関心をお持ちの方を当社にご紹介ください。</p>
-        </div>
-        <div class="flow__step">
-          <span class="flow__num">STEP 2</span>
-          <h4>面談・商談の実施</h4>
-          <p>当社担当者がご紹介先と面談を実施します（実施1件＝1J）。</p>
-        </div>
-        <div class="flow__step">
-          <span class="flow__num">STEP 3</span>
-          <h4>ご契約・決済</h4>
-          <p>ご紹介先が初めてご購入・決済された段階で、初回紹介フィーが発生します。</p>
-        </div>
-        <div class="flow__step">
-          <span class="flow__num">STEP 4</span>
-          <h4>買い増しでも継続</h4>
-          <p>3件目以降のご購入（買い増し）からは、リピートフィーの対象となります。</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ご案内 -->
     <section class="section" id="notes">
       <h2>ご案内・注意事項</h2>
       <ul class="notes">
         <li>本プログラムの優遇サービスは、当社から物件をご購入いただいているオーナー会員の方が対象です。</li>
         <li>会員ステータスの適用条件、各サービス内容、適用範囲および上限は、当社所定の基準に基づきます。</li>
         <li>ご紹介報酬の適用には、当社所定の条件確認が必要となります。</li>
-        <li>ご紹介先のお客様が初回のご購入で2件口（同時に2件）をご購入された場合、初回紹介フィーは1件分のみとなります。3件目以降からはリピートフィーの対象となります。</li>
+        <li>ご紹介先のお客様が初回のご購入で2件口（同時に2件）をご購入された場合、紹介人数は1名としてカウントし、初回紹介フィーは1件分のみとなります。その後の2件目以降の買い増しご購入は、所定条件に基づきリピートフィーの対象となります。</li>
         <li>紹介実施数（J）は、面談・商談を「実施」できた件数を1Jとしてカウントします。面談設定のみ・日程調整のみの場合は対象外です。</li>
         <li>GGCダイヤモンドおよびGGCダイヤモンドメタルの累計取引件数判定においては、ご夫婦で当社物件をお持ちの場合、所定条件のもと合算できる場合があります。</li>
-        <li>紹介料は税務上、雑所得として確定申告が必要となる場合があります。詳細は税理士または所轄税務署へご確認ください。</li>
+        <li style="list-style:none; margin-left:-20px; margin-top:10px;">
+          <div class="message message--strong">
+            <strong>税務上のご注意</strong><br />
+            紹介料は税務上、雑所得として確定申告が必要となる場合があります。詳細は税理士または所轄税務署へご確認ください。
+          </div>
+        </li>
         <li>制度内容は、予告なく変更となる場合があります。</li>
       </ul>
     </section>
