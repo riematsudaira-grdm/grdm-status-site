@@ -3,24 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GRDM会員ステータスプログラム</title>
+  <title>GRDMオーナーステータスプログラム</title>
   <style>
     :root{
-      --navy:#16233f;
-      --blue:#254f8f;
-      --sky:#eaf3ff;
-      --gold:#c9a85d;
-      --gold-deep:#9b7a2f;
-      --gold-soft:#f6efe2;
-      --metal:#b9c1cf;
-      --metal-deep:#707b8f;
-      --line:#d9e0ea;
-      --text:#243043;
-      --muted:#66758a;
-      --bg:#f6f8fc;
+      --navy:#14223d;
+      --navy-2:#1f3a68;
+      --blue:#29579a;
+      --sky:#eef5ff;
+      --sky-2:#f7fbff;
+      --gold:#c6a257;
+      --gold-deep:#8b6a23;
+      --gold-soft:#fbf4e6;
+      --metal:#cdd3dc;
+      --metal-deep:#6f7a8b;
+      --metal-soft:#f3f5f8;
+      --line:#dbe4f0;
+      --text:#223047;
+      --muted:#66768d;
+      --bg:#f5f8fc;
       --white:#ffffff;
-      --green:#1f8f62;
-      --amber:#b47b17;
+      --green:#19805d;
+      --amber:#ac7a16;
+      --red:#bf4853;
+      --shadow:0 14px 34px rgba(19,34,61,.07);
+      --radius-xl:26px;
+      --radius-lg:20px;
+      --radius-md:16px;
     }
 
     *{box-sizing:border-box;}
@@ -28,97 +36,126 @@
     body{
       margin:0;
       font-family:"Hiragino Sans","Yu Gothic","Meiryo",sans-serif;
+      background:linear-gradient(180deg,#f4f8fd 0%, #f7f9fc 100%);
       color:var(--text);
-      background:var(--bg);
       line-height:1.75;
     }
-
     a{color:inherit;text-decoration:none;}
 
     .wrap{
-      width:min(1180px, calc(100% - 32px));
+      width:min(1200px, calc(100% - 32px));
       margin:0 auto;
     }
 
     header{
+      position:relative;
+      overflow:hidden;
       background:
-        linear-gradient(135deg, rgba(22,35,63,.96), rgba(37,79,143,.92)),
-        #16233f;
+        radial-gradient(circle at 15% 15%, rgba(255,255,255,.15), transparent 28%),
+        radial-gradient(circle at 85% 20%, rgba(255,255,255,.09), transparent 22%),
+        linear-gradient(135deg, #13213d 0%, #213c6b 55%, #2a5a9f 100%);
       color:#fff;
-      padding:72px 0 56px;
+      padding:82px 0 60px;
+    }
+
+    header::after{
+      content:"";
+      position:absolute;
+      inset:auto -120px -120px auto;
+      width:340px;
+      height:340px;
+      background:radial-gradient(circle, rgba(255,255,255,.10), transparent 68%);
+      pointer-events:none;
     }
 
     .eyebrow{
-      display:inline-block;
-      padding:6px 12px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
       border:1px solid rgba(255,255,255,.28);
       border-radius:999px;
       font-size:12px;
       letter-spacing:.08em;
       margin-bottom:18px;
-      background:rgba(255,255,255,.08);
+      background:rgba(255,255,255,.09);
+      backdrop-filter:blur(4px);
     }
 
     h1{
       margin:0 0 14px;
-      font-size:clamp(30px, 4vw, 46px);
-      line-height:1.25;
+      font-size:clamp(32px, 4vw, 48px);
+      line-height:1.2;
       letter-spacing:.02em;
     }
 
     .lead{
       margin:0;
+      max-width:980px;
       font-size:16px;
-      color:rgba(255,255,255,.92);
-      max-width:960px;
+      color:rgba(255,255,255,.93);
     }
 
     .hero-points{
       margin-top:28px;
       display:grid;
-      grid-template-columns:repeat(3, 1fr);
+      grid-template-columns:repeat(3,1fr);
       gap:14px;
     }
 
     .hero-point{
       background:rgba(255,255,255,.10);
-      border:1px solid rgba(255,255,255,.14);
-      border-radius:16px;
+      border:1px solid rgba(255,255,255,.15);
+      border-radius:18px;
       padding:16px 18px;
-      backdrop-filter:blur(4px);
+      backdrop-filter:blur(6px);
+      min-height:108px;
     }
 
     .hero-point strong{
       display:block;
+      margin-bottom:6px;
       font-size:15px;
-      margin-bottom:4px;
+      color:#fff;
+    }
+
+    .hero-point span{
+      color:rgba(255,255,255,.9);
+      font-size:13px;
+      line-height:1.7;
     }
 
     nav{
       position:sticky;
       top:0;
-      z-index:10;
-      background:rgba(255,255,255,.95);
-      backdrop-filter:blur(8px);
-      border-bottom:1px solid #e7ebf2;
+      z-index:20;
+      background:rgba(255,255,255,.92);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid #e6edf6;
     }
 
     .nav-inner{
-      width:min(1180px, calc(100% - 32px));
+      width:min(1200px, calc(100% - 32px));
       margin:0 auto;
       display:flex;
-      gap:10px;
       flex-wrap:wrap;
+      gap:10px;
       padding:14px 0;
     }
 
     .nav-link{
       padding:10px 14px;
       border-radius:999px;
-      background:#f0f4fa;
+      background:#f1f5fb;
       color:var(--blue);
       font-size:14px;
       font-weight:700;
+      transition:.2s ease;
+    }
+
+    .nav-link:hover{
+      background:#e8f0fb;
+      transform:translateY(-1px);
     }
 
     section{
@@ -128,16 +165,17 @@
     .section-card{
       background:var(--white);
       border:1px solid #e5ebf4;
-      border-radius:24px;
-      padding:30px;
-      box-shadow:0 10px 30px rgba(16,34,68,.05);
+      border-radius:var(--radius-xl);
+      padding:32px;
+      box-shadow:var(--shadow);
     }
 
     h2{
       margin:0 0 12px;
-      font-size:30px;
-      line-height:1.35;
+      font-size:31px;
+      line-height:1.3;
       color:var(--navy);
+      letter-spacing:.01em;
     }
 
     .section-desc{
@@ -147,11 +185,12 @@
     }
 
     .notice{
-      background:linear-gradient(180deg, #f9fbff, #f2f7ff);
-      border:1px solid #dbe7fb;
-      border-radius:18px;
-      padding:18px 20px;
       margin-top:18px;
+      padding:18px 20px;
+      border-radius:18px;
+      background:linear-gradient(180deg,#fbfdff,#f2f7ff);
+      border:1px solid #d7e6fd;
+      color:var(--text);
     }
 
     .notice strong{color:var(--blue);}
@@ -160,30 +199,31 @@
       margin-top:14px;
       padding:14px 16px;
       border-radius:14px;
-      background:#fff8e9;
-      border:1px solid #f3dfaf;
-      color:#7b6323;
+      background:#fff8ea;
+      border:1px solid #f1dfb8;
+      color:#7b6425;
       font-size:13px;
     }
 
     .grid-2{
       display:grid;
-      grid-template-columns:repeat(2, 1fr);
+      grid-template-columns:repeat(2,1fr);
       gap:18px;
     }
 
     .grid-4{
       display:grid;
-      grid-template-columns:repeat(4, 1fr);
+      grid-template-columns:repeat(4,1fr);
       gap:16px;
     }
 
     .info-card,
     .route-card,
-    .step-card{
+    .step-card,
+    .status-card{
       background:#fff;
       border:1px solid #e6ebf2;
-      border-radius:18px;
+      border-radius:20px;
       padding:20px;
     }
 
@@ -191,9 +231,22 @@
       background:linear-gradient(180deg,#ffffff,#f9fbff);
     }
 
+    .badge{
+      display:inline-block;
+      margin-bottom:12px;
+      padding:5px 10px;
+      border-radius:999px;
+      background:var(--gold-soft);
+      color:#8c6a28;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.04em;
+    }
+
     .info-card h3,
     .route-card h3,
-    .step-card h3{
+    .step-card h3,
+    .status-card h3{
       margin:0 0 10px;
       font-size:19px;
       color:var(--navy);
@@ -201,40 +254,236 @@
 
     .info-card p,
     .route-card p,
-    .step-card p{
+    .step-card p,
+    .status-card p{
       margin:0;
-      color:var(--muted);
       font-size:14px;
+      color:var(--muted);
+      line-height:1.75;
     }
 
-    .badge{
-      display:inline-block;
-      margin-bottom:10px;
-      padding:5px 10px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:700;
-      letter-spacing:.04em;
-      background:var(--gold-soft);
-      color:#8d6d2d;
+    .status-grid{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:16px;
+      margin-top:20px;
     }
+
+    .status-card{
+      position:relative;
+      overflow:hidden;
+      min-height:245px;
+      background:linear-gradient(180deg,#ffffff 0%, #f7fbff 100%);
+      box-shadow:0 10px 24px rgba(26,49,92,.05);
+    }
+
+    .status-card::before{
+      content:"";
+      position:absolute;
+      inset:0 0 auto 0;
+      height:6px;
+      background:linear-gradient(90deg,#8db8ff,#376ac2);
+    }
+
+    .status-card.goc-sapphire::before{background:linear-gradient(90deg,#6fc3ff,#2994d9);}
+    .status-card.goc-premier::before{background:linear-gradient(90deg,#8fa6ff,#536be0);}
+    .status-card.ggc-diamond{
+      background:linear-gradient(180deg,#fffdf8 0%, #fbf3df 100%);
+      border-color:#efe1b8;
+    }
+    .status-card.ggc-diamond::before{
+      background:linear-gradient(90deg,#d3b36a,#9a7424);
+    }
+    .status-card.ggc-metal{
+      background:linear-gradient(180deg,#fbfbfd 0%, #edf0f5 100%);
+      border-color:#d6dde7;
+    }
+    .status-card.ggc-metal::before{
+      background:linear-gradient(90deg,#cfd4dd,#7b8797);
+    }
+
+    .status-label{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:58px;
+      height:28px;
+      border-radius:999px;
+      margin-bottom:12px;
+      background:#edf4ff;
+      color:var(--blue);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.05em;
+    }
+
+    .status-card.ggc-diamond .status-label{
+      background:#f6ecd2;
+      color:#86631d;
+    }
+
+    .status-card.ggc-metal .status-label{
+      background:#e6e9ef;
+      color:#576171;
+    }
+
+    .status-name{
+      display:block;
+      margin-bottom:2px;
+      font-size:22px;
+      font-weight:800;
+      color:var(--navy);
+      line-height:1.35;
+    }
+
+    .status-sub{
+      display:block;
+      margin-bottom:10px;
+      font-size:12px;
+      color:var(--muted);
+      font-weight:700;
+      letter-spacing:.02em;
+    }
+
+    .status-target{
+      margin-top:12px;
+      padding-top:12px;
+      border-top:1px dashed #d6dfeb;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .status-target strong{
+      color:var(--blue);
+      font-size:15px;
+    }
+
+    .status-card.ggc-diamond .status-target strong{color:#8a6823;}
+    .status-card.ggc-metal .status-target strong{color:#5f6b7b;}
 
     .route-card{
+      position:relative;
       border-color:#dfe8f7;
-      background:linear-gradient(180deg,#ffffff,#f6faff);
+      background:linear-gradient(180deg,#ffffff,#f7fbff);
+      min-height:210px;
     }
 
     .route-no{
-      width:38px;
-      height:38px;
+      width:40px;
+      height:40px;
       display:grid;
       place-items:center;
       border-radius:50%;
       background:var(--blue);
       color:#fff;
+      font-size:15px;
       font-weight:800;
       margin-bottom:12px;
+    }
+
+    .route-card strong{color:var(--blue);}
+
+    .or-diagram{
+      margin-top:24px;
+      padding:24px;
+      border-radius:22px;
+      background:linear-gradient(180deg,#fcfdff,#f6f9ff);
+      border:1px solid #e0e8f5;
+    }
+
+    .or-title{
+      margin:0 0 18px;
+      font-size:18px;
+      color:var(--navy);
+      font-weight:800;
+    }
+
+    .or-flow{
+      display:grid;
+      grid-template-columns:1.15fr .3fr 1.6fr;
+      gap:18px;
+      align-items:center;
+    }
+
+    .or-start,
+    .or-end{
+      border-radius:20px;
+      padding:22px;
+      background:#fff;
+      border:1px solid #e2e9f3;
+      min-height:180px;
+    }
+
+    .or-start{
+      background:linear-gradient(180deg,#ffffff,#f8fbff);
+    }
+
+    .or-end{
+      background:linear-gradient(180deg,#fffdf8,#f7f0df);
+      border-color:#efe1b7;
+    }
+
+    .or-mid{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:12px;
+    }
+
+    .or-pill{
+      padding:8px 14px;
+      border-radius:999px;
+      background:#edf4ff;
+      color:var(--blue);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.05em;
+    }
+
+    .arrow{
+      font-size:28px;
+      color:#6a7e9d;
+      font-weight:800;
+      line-height:1;
+    }
+
+    .or-start h3,
+    .or-end h3{
+      margin:0 0 10px;
+      font-size:22px;
+      color:var(--navy);
+    }
+
+    .or-start p,
+    .or-end p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .criteria-list{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+      margin-top:14px;
+    }
+
+    .criteria-item{
+      padding:14px 14px;
+      border-radius:16px;
+      background:#f6f9fe;
+      border:1px solid #e1e9f5;
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.65;
+    }
+
+    .criteria-item strong{
+      display:block;
+      color:var(--navy);
       font-size:15px;
+      margin-bottom:4px;
     }
 
     .callout{
@@ -251,15 +500,16 @@
       overflow-x:auto;
       margin-top:20px;
       border:1px solid #e5ebf4;
-      border-radius:20px;
+      border-radius:22px;
       background:#fff;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
     }
 
     table{
       width:100%;
       border-collapse:collapse;
       table-layout:fixed;
-      min-width:900px;
+      min-width:920px;
     }
 
     th, td{
@@ -304,33 +554,41 @@
       font-size:12px;
     }
 
+    .goc-row{
+      background:linear-gradient(180deg,#fcfdff,#f6f9ff);
+    }
+
+    .ggc-head{
+      background:linear-gradient(180deg,#fff8ea,#f1dfb0) !important;
+      color:#73561b !important;
+    }
+
+    .ggc-metal-head{
+      background:linear-gradient(180deg,#f4f5f8,#d7dde6) !important;
+      color:#515b6b !important;
+    }
+
+    .ggc-col{
+      background:linear-gradient(180deg,#fffef9,#faf1dc);
+    }
+
+    .ggc-metal-col{
+      background:linear-gradient(180deg,#fcfcfd,#edf0f5);
+    }
+
     .accent{
       color:var(--blue);
       font-weight:800;
     }
 
-    .goc-cell{
-      background:linear-gradient(180deg,#f9fbff,#f4f8ff);
+    .gold-accent{
+      color:#8b6a23;
+      font-weight:800;
     }
 
-    .ggc-head{
-      background:linear-gradient(180deg,#fff7e8,#f2e3bd) !important;
-      color:#6f571c !important;
-      box-shadow:inset 0 -1px 0 rgba(140,106,34,.12);
-    }
-
-    .ggc-metal-head{
-      background:linear-gradient(180deg,#f4f1eb,#d9dde6) !important;
-      color:#4f5869 !important;
-      box-shadow:inset 0 -1px 0 rgba(75,84,101,.12);
-    }
-
-    .ggc-col{
-      background:linear-gradient(180deg,#fffdf8,#fbf3df);
-    }
-
-    .ggc-metal-col{
-      background:linear-gradient(180deg,#fbfbfd,#edf0f5);
+    .metal-accent{
+      color:#5e6878;
+      font-weight:800;
     }
 
     .ok{
@@ -349,14 +607,14 @@
     }
 
     .table-note{
-      padding:16px 18px 4px;
+      padding:16px 18px 6px;
       color:var(--muted);
       font-size:13px;
     }
 
     .flow{
       display:grid;
-      grid-template-columns:repeat(4, 1fr);
+      grid-template-columns:repeat(4,1fr);
       gap:16px;
       margin-top:18px;
     }
@@ -365,6 +623,7 @@
       position:relative;
       padding-top:58px;
       background:linear-gradient(180deg,#ffffff,#f8fbff);
+      min-height:265px;
     }
 
     .step-no{
@@ -374,7 +633,7 @@
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      min-width:78px;
+      min-width:80px;
       height:28px;
       border-radius:999px;
       background:var(--navy);
@@ -409,24 +668,36 @@
       text-align:center;
     }
 
-    @media (max-width: 1024px){
+    @media (max-width: 1100px){
+      .status-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
       .hero-points,
       .grid-4,
       .flow{
-        grid-template-columns:repeat(2, 1fr);
+        grid-template-columns:repeat(2,1fr);
       }
+      .or-flow{
+        grid-template-columns:1fr;
+      }
+      .or-mid{
+        flex-direction:row;
+      }
+      .arrow{transform:rotate(90deg);}
     }
 
     @media (max-width: 760px){
-      header{padding:56px 0 42px;}
+      header{padding:58px 0 44px;}
       .hero-points,
       .grid-2,
       .grid-4,
-      .flow{
+      .flow,
+      .status-grid,
+      .criteria-list{
         grid-template-columns:1fr;
       }
       .section-card{padding:22px;}
-      h2{font-size:25px;}
+      h2{font-size:26px;}
       .nav-inner{padding:10px 0;}
       .nav-link{font-size:13px;padding:9px 12px;}
     }
@@ -435,27 +706,26 @@
 <body>
   <header>
     <div class="wrap">
-      <span class="eyebrow">GRDM MEMBERSHIP STATUS PROGRAM</span>
-      <h1>GRDM会員ステータスプログラム</h1>
+      <span class="eyebrow">GRDM OWNER STATUS PROGRAM</span>
+      <h1>GRDMオーナーステータスプログラム</h1>
       <p class="lead">
-        未購入の方からオーナー会員の方まで、取引実績やご紹介実績に応じてステータス判定を行うGRDMの会員制度です。
-        初回は0件の方も<strong>GOCクリスタル会員</strong>として登録可能とし、
-        その後は<strong>累計取引件数（購入・買取）・紹介決済数・紹介人数・紹介実施数（J）</strong>の
-        いずれかを満たすことで昇格判定を行います。
+        積み重ねたお取引とご紹介実績に応じて、会員ステータスと優遇内容が決まるGRDMのオーナー向けプログラムです。
+        これまでのオーナー用の考え方をベースにしながら、<strong>0件の未購入の方もGOCクリスタル会員として登録可能</strong>な形に整理し、
+        一つの資料でわかりやすくご案内できる構成にしています。
       </p>
 
       <div class="hero-points">
         <div class="hero-point">
-          <strong>0件でもGOCクリスタル会員</strong>
-          <span>未購入の方も同じ制度内でご案内できる、統合型の会員プログラムです。</span>
+          <strong>0件の方もスタート可能</strong>
+          <span>未購入の方もGOCクリスタル会員として登録でき、同じ制度の中でご案内可能です。</span>
         </div>
         <div class="hero-point">
           <strong>昇格は4つのOR条件</strong>
-          <span>累計取引件数 / 紹介決済数 / 紹介人数 / 紹介実施数（J）で判定します。</span>
+          <span>累計取引件数（購入・買取）/ 紹介決済数 / 紹介人数 / 紹介実施数（J）で判定します。</span>
         </div>
         <div class="hero-point">
-          <strong>紹介は協力型でOK</strong>
-          <span>専門説明や契約行為は当社が担当し、接点づくりのご協力を前提とします。</span>
+          <strong>紹介は協力スタイルでOK</strong>
+          <span>専門説明・契約行為・クロージングは当社が担当し、接点づくりへのご協力を前提とします。</span>
         </div>
       </div>
     </div>
@@ -464,8 +734,9 @@
   <nav>
     <div class="nav-inner">
       <a class="nav-link" href="#overview">概要</a>
+      <a class="nav-link" href="#status-list">ステータス一覧</a>
       <a class="nav-link" href="#glossary">用語説明</a>
-      <a class="nav-link" href="#routes">昇格ルート</a>
+      <a class="nav-link" href="#routes">昇格イメージ</a>
       <a class="nav-link" href="#criteria">ステータス基準</a>
       <a class="nav-link" href="#benefits">優遇サービス</a>
       <a class="nav-link" href="#fees">ご紹介報酬</a>
@@ -479,18 +750,19 @@
       <div class="section-card">
         <h2>プログラム概要</h2>
         <p class="section-desc">
-          本制度は、未購入の方も含めて同一の会員ステータス体系でご案内できるよう整理したGRDM会員制度です。
-          「まず会員登録し、将来的にご購入やご紹介実績に応じてステータスが上がっていく」という流れを、
-          一つの資料でわかりやすくお伝えできるようにしています。
+          本制度は、GRDMでのお取引やご紹介実績に応じて、会員ステータスと優遇内容が決まるプログラムです。
+          従来のオーナー向け資料の考え方をベースにしつつ、未購入の方も制度の入り口に含めることで、
+          「まず会員登録し、その後の購入・ご紹介実績に応じてステータスが上がっていく」という流れを、
+          1ページで直感的に理解しやすく整理しています。
         </p>
 
         <div class="notice">
           <strong>判定ルールについて</strong><br />
-          0件の未購入者も<strong>GOCクリスタル会員</strong>として登録可能です。<br />
-          既存顧客の初回ステータス確認は、まず<strong>累計取引件数（購入・買取）</strong>を基本軸として行い、
+          0件の未購入の方も、<strong>GOCクリスタル会員</strong>として登録可能です。<br />
+          初回の基本確認は<strong>累計取引件数（購入・買取）</strong>を軸に行い、
           その後の昇格は
           <strong>累計取引件数（購入・買取）・紹介決済数・紹介人数・紹介実施数（J）</strong>
-          の<strong>4つのOR条件</strong>で判定します。
+          の<strong>4つのうち、いずれか1つを満たすことで判定</strong>する仕組みです。
         </div>
 
         <div class="subnotice">
@@ -499,11 +771,78 @@
       </div>
     </section>
 
+    <section id="status-list">
+      <div class="section-card">
+        <h2>ステータス一覧</h2>
+        <p class="section-desc">
+          GRDMの会員ステータスは、以下の5段階で構成されています。
+          GOCから始まり、より高い実績に応じてGGCの上位ステータスへ昇格していきます。
+        </p>
+
+        <div class="status-grid">
+          <div class="status-card goc-crystal">
+            <span class="status-label">GOC</span>
+            <span class="status-name">クリスタル</span>
+            <span class="status-sub">Glamane Owners Club</span>
+            <p>制度の入口となる基本ステータス。未購入の方もここからスタートできます。</p>
+            <div class="status-target">
+              <strong>0件登録可 / 1件も含む</strong><br />
+              ご紹介制度の対象となり、ステータスアップの起点になります。
+            </div>
+          </div>
+
+          <div class="status-card goc-sapphire">
+            <span class="status-label">GOC</span>
+            <span class="status-name">サファイア</span>
+            <span class="status-sub">Glamane Owners Club</span>
+            <p>専任担当などの優遇イメージが始まる中位ステータスです。</p>
+            <div class="status-target">
+              <strong>2件 / 3決済 / 3名 / 9J</strong><br />
+              4つのOR条件のいずれかで昇格対象。
+            </div>
+          </div>
+
+          <div class="status-card goc-premier">
+            <span class="status-label">GOC</span>
+            <span class="status-name">プレミア</span>
+            <span class="status-sub">Glamane Owners Club</span>
+            <p>優先案内やレポートなど、より上位の優遇イメージを持つステータスです。</p>
+            <div class="status-target">
+              <strong>3件 / 6決済 / 6名 / 18J</strong><br />
+              GOC内の上位ランクとして位置づけます。
+            </div>
+          </div>
+
+          <div class="status-card ggc-diamond">
+            <span class="status-label">GGC</span>
+            <span class="status-name">ダイヤモンド</span>
+            <span class="status-sub">Glamane Global Club</span>
+            <p>GRDM上級会員帯のハイグレードステータス。高級感のある上位帯です。</p>
+            <div class="status-target">
+              <strong>10件 / 10決済 / 10名 / 30J</strong><br />
+              追加優遇を想定した上位層です。
+            </div>
+          </div>
+
+          <div class="status-card ggc-metal">
+            <span class="status-label">GGC</span>
+            <span class="status-name">ダイヤモンドメタル</span>
+            <span class="status-sub">Glamane Global Club</span>
+            <p>GRDM会員制度の最上位にあたる特別ステータスです。</p>
+            <div class="status-target">
+              <strong>20件 / 20決済 / 20名 / 60J</strong><br />
+              もっとも高い実績に対して位置づける最上位帯です。
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="glossary">
       <div class="section-card">
         <h2>用語説明</h2>
         <p class="section-desc">
-          この制度で使う主要な用語を、わかりやすく整理しています。
+          制度内で用いる主な用語を整理しています。
         </p>
 
         <div class="grid-2">
@@ -511,7 +850,7 @@
             <span class="badge">GOC</span>
             <h3>グラマネ オーナーズ クラブ</h3>
             <p>
-              GRDM会員制度における基本～中位ステータス帯です。
+              GRDM会員制度の基本～中位ステータス帯です。
               クリスタル・サファイア・プレミアの3段階で構成されます。
             </p>
           </div>
@@ -520,7 +859,7 @@
             <span class="badge">GGC</span>
             <h3>グラマネ グローバル クラブ</h3>
             <p>
-              GRDM会員制度における上位ステータス帯です。
+              GRDM会員制度の上位ステータス帯です。
               ダイヤモンド・ダイヤモンドメタルの2段階で構成されます。
             </p>
           </div>
@@ -539,7 +878,7 @@
             <span class="badge">J（紹介実施数）</span>
             <h3>面談・商談の実施カウント</h3>
             <p>
-              ご紹介先との面談・商談が実際に実施された場合に1Jとしてカウントします。
+              ご紹介先との面談・商談が実際に行われた場合に1Jとしてカウントします。
               日程調整のみ、連絡先共有のみではJとしてカウントしません。
             </p>
           </div>
@@ -549,10 +888,10 @@
 
     <section id="routes">
       <div class="section-card">
-        <h2>4つの昇格ルート</h2>
+        <h2>昇格イメージ</h2>
         <p class="section-desc">
-          ステータス昇格は、以下4つのうちいずれかの条件達成で判定されます。
-          物件取得を増やすことが難しい方でも、ご紹介や面談実施へのご協力によって昇格を目指せる仕組みです。
+          ステータス昇格は、4つのルートのうちいずれかを満たすことで判定されます。
+          物件取得だけでなく、ご紹介実績や面談実施へのご協力でも昇格を目指せる設計です。
         </p>
 
         <div class="grid-4">
@@ -561,7 +900,7 @@
             <h3>累計取引件数</h3>
             <p>
               <strong>購入・買取</strong>の合計件数です。
-              お取引そのものの積み重ねを評価します。
+              ご自身のお取引の積み重ねが、そのまま評価対象になります。
             </p>
           </div>
 
@@ -569,8 +908,8 @@
             <div class="route-no">02</div>
             <h3>紹介決済数</h3>
             <p>
-              ご紹介先のご契約・決済完了件数です。
-              実際の成果としての紹介実績を表します。
+              ご紹介先の契約・決済完了件数です。
+              実際の成果としてのご紹介実績を示します。
             </p>
           </div>
 
@@ -579,7 +918,7 @@
             <h3>紹介人数</h3>
             <p>
               ご紹介により購入された方の人数です。
-              初回に2件口で購入された場合でも、<strong>1名</strong>としてカウントします。
+              初回2件口で購入された場合でも、<strong>1名</strong>としてカウントします。
             </p>
           </div>
 
@@ -588,15 +927,70 @@
             <h3>紹介実施数（J）</h3>
             <p>
               面談・商談の実施件数です。
-              お客様に専門説明を求めるものではなく、当社との協力体制の深さを示します。
+              お客様に専門説明を求めるものではなく、協力体制の指標です。
             </p>
+          </div>
+        </div>
+
+        <div class="or-diagram">
+          <p class="or-title">ステータスアップの考え方</p>
+          <div class="or-flow">
+            <div class="or-start">
+              <h3>GOCクリスタルから開始</h3>
+              <p>
+                0件の未購入の方も、1件のお取引がある方も、
+                まずはGOCクリスタル会員としてスタートします。
+              </p>
+              <div class="criteria-list">
+                <div class="criteria-item">
+                  <strong>0件でも登録可</strong>
+                  未購入の方も制度に参加可能です。
+                </div>
+                <div class="criteria-item">
+                  <strong>1件もクリスタル帯</strong>
+                  まずは基本ランクとして位置づけます。
+                </div>
+              </div>
+            </div>
+
+            <div class="or-mid">
+              <span class="or-pill">いずれか達成</span>
+              <div class="arrow">→</div>
+              <span class="or-pill">OR 条件</span>
+            </div>
+
+            <div class="or-end">
+              <h3>次のステータスへ昇格</h3>
+              <p>
+                以下4つの条件のうち、どれか1つを満たせば、
+                サファイア以上の昇格判定対象となります。
+              </p>
+              <div class="criteria-list">
+                <div class="criteria-item">
+                  <strong>累計取引件数</strong>
+                  購入・買取の合計件数
+                </div>
+                <div class="criteria-item">
+                  <strong>紹介決済数</strong>
+                  紹介先の成約・決済件数
+                </div>
+                <div class="criteria-item">
+                  <strong>紹介人数</strong>
+                  購入されたご紹介先の人数
+                </div>
+                <div class="criteria-item">
+                  <strong>紹介実施数（J）</strong>
+                  面談・商談の実施件数
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="callout">
           <strong>ご紹介の考え方</strong><br />
           本制度は、お客様ご本人に不動産の専門説明やクロージングをお願いするものではありません。
-          あくまで「信頼できる方をご紹介いただき、当社との面談機会をつくっていただく」という協力体制を評価するものです。
+          あくまで「信頼できる方をご紹介いただき、当社との面談機会をつくっていただく」という協力体制を評価する制度です。
           詳細な説明、条件提示、提案、契約実務、法令・コンプライアンス対応は当社が責任を持って行います。
         </div>
       </div>
@@ -604,9 +998,9 @@
 
     <section id="criteria">
       <div class="section-card">
-        <h2>ステータス基準</h2>
+        <h2>ステータス基準一覧</h2>
         <p class="section-desc">
-          0件の方もGOCクリスタル会員として登録可能です。
+          GOCクリスタルは0件の方も対象です。
           サファイア以上は、<strong>累計取引件数（購入・買取）・紹介決済数・紹介人数・紹介実施数（J）</strong>
           のいずれか1つを満たすことで判定対象となります。
         </p>
@@ -630,7 +1024,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="goc-cell">
+              <tr class="goc-row">
                 <td>
                   <div class="rank">
                     <span>GOCクリスタル</span>
@@ -642,7 +1036,7 @@
                 <td class="dash">―</td>
                 <td class="dash">―</td>
               </tr>
-              <tr class="goc-cell">
+              <tr class="goc-row">
                 <td>
                   <div class="rank">
                     <span>GOCサファイア</span>
@@ -654,7 +1048,7 @@
                 <td>3名</td>
                 <td>9J</td>
               </tr>
-              <tr class="goc-cell">
+              <tr class="goc-row">
                 <td>
                   <div class="rank">
                     <span>GOCプレミア</span>
@@ -673,7 +1067,7 @@
                     <small>Glamane Global Club</small>
                   </div>
                 </td>
-                <td class="ggc-col">10件</td>
+                <td class="ggc-col gold-accent">10件</td>
                 <td class="ggc-col">10件</td>
                 <td class="ggc-col">10名</td>
                 <td class="ggc-col">30J</td>
@@ -685,7 +1079,7 @@
                     <small>Glamane Global Club</small>
                   </div>
                 </td>
-                <td class="ggc-metal-col">20件</td>
+                <td class="ggc-metal-col metal-accent">20件</td>
                 <td class="ggc-metal-col">20件</td>
                 <td class="ggc-metal-col">20名</td>
                 <td class="ggc-metal-col">60J</td>
@@ -831,7 +1225,7 @@
         <h2>ご紹介報酬</h2>
         <p class="section-desc">
           ステータスごとに、初回紹介フィーとリピートフィーをご用意しています。
-          表の見やすさを考え、各行にステータス名称を明記しています。
+          表だけ見ても分かりやすいよう、各行にステータス名称を明記しています。
         </p>
 
         <div class="table-wrap">
@@ -849,7 +1243,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="goc-cell">
+              <tr class="goc-row">
                 <td>
                   <div class="rank">
                     <span>GOCクリスタル</span>
@@ -859,7 +1253,7 @@
                 <td>50万円</td>
                 <td>5万円</td>
               </tr>
-              <tr class="goc-cell">
+              <tr class="goc-row">
                 <td>
                   <div class="rank">
                     <span>GOCサファイア</span>
@@ -869,7 +1263,7 @@
                 <td>75万円</td>
                 <td>10万円</td>
               </tr>
-              <tr class="goc-cell">
+              <tr class="goc-row">
                 <td>
                   <div class="rank">
                     <span>GOCプレミア</span>
@@ -923,7 +1317,7 @@
             <h3>ご紹介先の共有</h3>
             <p>
               不動産投資や資産形成に関心がありそうな方をご紹介ください。
-              詳細な説明は不要です。
+              詳しい説明は不要です。
             </p>
             <ul>
               <li>「興味がありそうな方」の橋渡しでOK</li>
@@ -974,9 +1368,8 @@
 
         <div class="callout">
           <strong>制度の意図</strong><br />
-          本制度は、ご紹介の質を大切にしながら、良いご縁をつないでいただくことにしっかり価値を置く仕組みです。
-          一方で、お客様に営業行為や法令上問題のある説明をお願いする趣旨ではなく、
-          あくまで協力体制としてのご参加を前提としています。
+          本制度は、良いご紹介にしっかり価値を置きながら、お客様には営業行為や法令上問題のある説明を求めない形で、
+          協力体制として参加いただくための制度です。
         </div>
       </div>
     </section>
@@ -1001,7 +1394,7 @@
     </section>
 
     <footer>
-      © GRDM Membership Status Program
+      © GRDM Owner Status Program
     </footer>
   </main>
 </body>
