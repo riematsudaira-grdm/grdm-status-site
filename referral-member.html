@@ -3,664 +3,1096 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GRDM紹介会員プログラム</title>
+  <title>GRDMオーナーステータスプログラム</title>
   <style>
-    :root{
-      --navy:#16233f;
-      --blue:#254f8f;
-      --sky:#eaf3ff;
-      --gold:#c9a85d;
-      --gold-soft:#f6efe2;
-      --line:#d9e0ea;
-      --text:#243043;
-      --muted:#66758a;
-      --bg:#f6f8fc;
-      --white:#ffffff;
-      --green:#1f8f62;
-      --red:#be3f4b;
+    :root {
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --text: #1f2937;
+      --muted: #667085;
+      --line: #d8e0ea;
+      --navy: #153a6b;
+      --navy-2: #1f5aa6;
+      --gold: #9b7a38;
+      --sapphire: #135fae;
+      --diamond: #334155;
+      --metal: #5b6470;
+      --premium-bg: linear-gradient(135deg, #334155 0%, #0f172a 100%);
+      --premium-line: rgba(255,255,255,.14);
+      --warn-bg: #fff7e8;
+      --warn-line: #f0d39a;
+      --warn-text: #7a5614;
+      --shadow: 0 12px 28px rgba(15, 43, 84, .08);
+      --radius-lg: 22px;
+      --radius-md: 18px;
+      --max: 1180px;
     }
 
-    *{box-sizing:border-box;}
-    html{scroll-behavior:smooth;}
-    body{
-      margin:0;
-      font-family:"Hiragino Sans","Yu Gothic","Meiryo",sans-serif;
-      color:var(--text);
-      background:var(--bg);
-      line-height:1.75;
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
     }
 
-    a{color:inherit;text-decoration:none;}
-
-    .wrap{
-      width:min(1180px, calc(100% - 32px));
-      margin:0 auto;
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+      line-height: 1.75;
+      -webkit-text-size-adjust: 100%;
     }
 
-    header{
-      background:
-        linear-gradient(135deg, rgba(22,35,63,.95), rgba(37,79,143,.92)),
-        #16233f;
-      color:#fff;
-      padding:72px 0 56px;
+    img {
+      max-width: 100%;
+      height: auto;
     }
 
-    .eyebrow{
-      display:inline-block;
-      padding:6px 12px;
-      border:1px solid rgba(255,255,255,.28);
-      border-radius:999px;
-      font-size:12px;
-      letter-spacing:.08em;
-      margin-bottom:18px;
-      background:rgba(255,255,255,.08);
+    a {
+      color: var(--navy-2);
+      text-decoration: none;
     }
 
-    h1{
-      margin:0 0 14px;
-      font-size:clamp(30px, 4vw, 46px);
-      line-height:1.25;
-      letter-spacing:.02em;
+    a:hover {
+      text-decoration: underline;
     }
 
-    .lead{
-      margin:0;
-      font-size:16px;
-      color:rgba(255,255,255,.92);
-      max-width:920px;
+    .page {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+      padding: 24px 0 56px;
     }
 
-    .hero-points{
-      margin-top:28px;
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:14px;
+    .hero {
+      padding: 42px 34px;
+      border-radius: var(--radius-lg);
+      color: #fff;
+      background: linear-gradient(135deg, #102f5a 0%, #1b5aa6 100%);
+      box-shadow: var(--shadow);
     }
 
-    .hero-point{
-      background:rgba(255,255,255,.1);
-      border:1px solid rgba(255,255,255,.14);
-      border-radius:16px;
-      padding:16px 18px;
-      backdrop-filter:blur(4px);
+    .hero__tag {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 4px 10px;
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 999px;
+      font-size: 12px;
+      letter-spacing: .08em;
     }
 
-    .hero-point strong{
-      display:block;
-      font-size:15px;
-      margin-bottom:4px;
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: clamp(30px, 4vw, 44px);
+      line-height: 1.25;
     }
 
-    nav{
-      position:sticky;
-      top:0;
-      z-index:10;
-      background:rgba(255,255,255,.95);
-      backdrop-filter:blur(8px);
-      border-bottom:1px solid #e7ebf2;
+    .hero__copy {
+      margin: 0 0 14px;
+      font-size: clamp(18px, 2vw, 22px);
+      font-weight: 700;
     }
 
-    .nav-inner{
-      width:min(1180px, calc(100% - 32px));
-      margin:0 auto;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      padding:14px 0;
+    .hero__lead {
+      max-width: 860px;
+      margin: 0;
+      opacity: .95;
     }
 
-    .nav-link{
-      padding:10px 14px;
-      border-radius:999px;
-      background:#f0f4fa;
-      color:var(--blue);
-      font-size:14px;
-      font-weight:700;
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      margin: 18px 0 24px;
+      padding: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--line);
+      box-shadow: 0 8px 16px rgba(17, 24, 39, .05);
     }
 
-    section{
-      padding:56px 0 0;
+    .nav a {
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--navy);
+      white-space: nowrap;
+      background: #f7fafc;
+      border: 1px solid transparent;
+      flex: 0 0 auto;
     }
 
-    .section-card{
-      background:var(--white);
-      border:1px solid #e5ebf4;
-      border-radius:24px;
-      padding:30px;
-      box-shadow:0 10px 30px rgba(16,34,68,.05);
+    .nav a:hover {
+      background: #ecf4ff;
+      border-color: #dbe6f2;
+      text-decoration: none;
     }
 
-    h2{
-      margin:0 0 12px;
-      font-size:30px;
-      line-height:1.35;
-      color:var(--navy);
+    .section {
+      margin-top: 20px;
+      padding: 28px;
+      border-radius: 20px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
     }
 
-    .section-desc{
-      margin:0 0 22px;
-      color:var(--muted);
-      font-size:15px;
+    .section h2 {
+      margin: 0 0 8px;
+      color: var(--navy);
+      font-size: 28px;
+      line-height: 1.35;
     }
 
-    .notice{
-      background:linear-gradient(180deg, #f9fbff, #f2f7ff);
-      border:1px solid #dbe7fb;
-      border-radius:18px;
-      padding:18px 20px;
-      margin-top:18px;
+    .section h3 {
+      margin: 24px 0 10px;
+      font-size: 20px;
+      line-height: 1.4;
     }
 
-    .notice strong{color:var(--blue);}
-
-    .callout{
-      margin-top:18px;
-      padding:18px 20px;
-      border-radius:18px;
-      background:#fff7ea;
-      border:1px solid #f1ddaf;
-      color:#785f22;
-      font-size:14px;
+    .lead {
+      color: var(--muted);
+      margin: 0;
     }
 
-    .grid-2{
-      display:grid;
-      grid-template-columns:repeat(2, 1fr);
-      gap:18px;
+    .badge-draft {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 2px 10px;
+      border-radius: 999px;
+      background: #fff1cf;
+      color: #7a5614;
+      font-size: 12px;
+      font-weight: 700;
+      vertical-align: middle;
     }
 
-    .grid-3{
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:16px;
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
     }
 
-    .info-card,
-    .step-card,
-    .point-card{
-      background:#fff;
-      border:1px solid #e6ebf2;
-      border-radius:18px;
-      padding:20px;
+    .pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #f3f7fc;
+      border: 1px solid #dbe6f2;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--navy);
     }
 
-    .info-card{
-      background:linear-gradient(180deg,#ffffff,#f9fbff);
+    .glossary {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(260px, 1fr));
+      gap: 14px;
     }
 
-    .info-card h3,
-    .step-card h3,
-    .point-card h3{
-      margin:0 0 10px;
-      font-size:19px;
-      color:var(--navy);
+    .glossary__item {
+      padding: 18px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: #fbfdff;
     }
 
-    .info-card p,
-    .step-card p,
-    .point-card p{
-      margin:0;
-      color:var(--muted);
-      font-size:14px;
+    .glossary__item h4 {
+      margin: 0 0 6px;
+      color: var(--navy);
+      font-size: 16px;
+      line-height: 1.45;
     }
 
-    .badge{
-      display:inline-block;
-      margin-bottom:10px;
-      padding:5px 10px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:700;
-      letter-spacing:.04em;
-      background:var(--gold-soft);
-      color:#8d6d2d;
+    .glossary__item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
     }
 
-    .table-wrap{
-      overflow-x:auto;
-      margin-top:20px;
-      border:1px solid #e5ebf4;
-      border-radius:20px;
-      background:#fff;
+    .cards {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(180px, 1fr));
+      gap: 14px;
     }
 
-    table{
-      width:100%;
-      border-collapse:collapse;
-      table-layout:fixed;
-      min-width:820px;
+    .card {
+      padding: 18px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line);
+      min-height: 270px;
+      background: linear-gradient(180deg, #fff, #f9fbfd);
+      box-shadow: 0 8px 18px rgba(15, 23, 42, .04);
+      display: flex;
+      flex-direction: column;
     }
 
-    th, td{
-      padding:16px 14px;
-      border-bottom:1px solid #e8edf5;
-      vertical-align:middle;
-      font-size:14px;
-      line-height:1.6;
-      word-break:break-word;
+    .card h3 {
+      margin: 8px 0 4px;
+      font-size: 18px;
+      line-height: 1.3;
     }
 
-    thead th{
-      background:#f2f6fc;
-      color:var(--navy);
-      font-size:13px;
-      letter-spacing:.02em;
-      font-weight:800;
+    .card .sub-en {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-size: 12.5px;
+      letter-spacing: .03em;
+      font-weight: 700;
+      line-height: 1.5;
+      word-break: break-word;
     }
 
-    tbody tr:nth-child(even){
-      background:#fbfdff;
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
     }
 
-    td:first-child, th:first-child{
-      text-align:left;
-      font-weight:700;
+    .card__meta {
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px dashed #d6deea;
     }
 
-    td:not(:first-child), th:not(:first-child){
-      text-align:center;
+    .card__meta strong {
+      display: block;
+      color: var(--navy);
+      font-size: 13px;
+      line-height: 1.5;
     }
 
-    .table-note{
-      padding:16px 18px 4px;
-      color:var(--muted);
-      font-size:13px;
+    .card__meta span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+      margin-top: 3px;
     }
 
-    .flow{
-      display:grid;
-      grid-template-columns:repeat(4, 1fr);
-      gap:16px;
-      margin-top:18px;
+    .label {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      align-self: flex-start;
     }
 
-    .step-card{
-      position:relative;
-      padding-top:58px;
-      background:linear-gradient(180deg,#ffffff,#f8fbff);
+    .crystal { background: linear-gradient(180deg, #f7fbff, #edf3f8); }
+    .sapphire-card { background: linear-gradient(180deg, #edf6ff, #deecff); }
+    .premier { background: linear-gradient(180deg, #fffaf0, #f8edd7); }
+
+    .diamond-card,
+    .metal-card {
+      color: #fff;
+      background: var(--premium-bg);
+      border-color: var(--premium-line);
+      box-shadow: 0 14px 26px rgba(15, 23, 42, .22);
     }
 
-    .step-no{
-      position:absolute;
-      left:18px;
-      top:18px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-width:78px;
-      height:28px;
-      border-radius:999px;
-      background:var(--navy);
-      color:#fff;
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.06em;
+    .diamond-card h3,
+    .metal-card h3,
+    .diamond-card .sub-en,
+    .metal-card .sub-en,
+    .diamond-card p,
+    .metal-card p,
+    .diamond-card .card__meta strong,
+    .metal-card .card__meta strong,
+    .diamond-card .card__meta span,
+    .metal-card .card__meta span {
+      color: rgba(255,255,255,.96);
     }
 
-    .step-card ul{
-      margin:10px 0 0 18px;
-      padding:0;
-      color:var(--muted);
-      font-size:14px;
+    .diamond-card .card__meta,
+    .metal-card .card__meta {
+      border-top: 1px dashed rgba(255,255,255,.22);
     }
 
-    .step-card li+li{margin-top:6px;}
-
-    .notes{
-      margin:0;
-      padding-left:20px;
-      color:var(--muted);
-      font-size:14px;
+    .premium-note {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.18);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      align-self: flex-start;
     }
 
-    .notes li+li{margin-top:8px;}
+    .label.crystal-l { background: #8899ad; }
+    .label.sapphire-l { background: var(--sapphire); }
+    .label.premier-l { background: var(--gold); }
+    .label.diamond-l { background: #475569; }
+    .label.metal-l { background: #64748b; }
 
-    .status-chip{
-      display:inline-block;
-      padding:6px 10px;
-      border-radius:999px;
-      background:#eef4ff;
-      color:var(--blue);
-      font-size:12px;
-      font-weight:800;
-      margin-bottom:10px;
+    .routes {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(180px, 1fr));
+      gap: 14px;
     }
 
-    footer{
-      padding:48px 0 64px;
-      color:#7d8ba0;
-      font-size:13px;
-      text-align:center;
+    .route {
+      padding: 18px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, #ffffff, #f5f9ff);
     }
 
-    @media (max-width: 1024px){
-      .hero-points,
-      .grid-3,
-      .flow{
-        grid-template-columns:repeat(2, 1fr);
+    .route__num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: #fff;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .route h4 {
+      margin: 0 0 6px;
+      color: var(--navy);
+      font-size: 16px;
+      line-height: 1.45;
+    }
+
+    .route p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .or-banner {
+      margin-top: 14px;
+      padding: 12px 18px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #fff9ed 0%, #fff3d6 100%);
+      border: 1px solid #efd9a3;
+      color: #6b4d11;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin-top: 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 860px;
+    }
+
+    caption {
+      caption-side: top;
+      text-align: left;
+      font-weight: 700;
+      padding: 16px 16px 0;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      font-size: 14px;
+    }
+
+    thead th {
+      background: #f7fafc;
+      color: var(--navy);
+      font-weight: 800;
+    }
+
+    .premium-head {
+      background: linear-gradient(135deg, #475569 0%, #1f2937 100%) !important;
+      color: #fff !important;
+    }
+
+    .premium-cell {
+      background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+      font-weight: 700;
+      color: var(--diamond);
+    }
+
+    tbody th {
+      background: #fcfdff;
+      min-width: 160px;
+    }
+
+    tbody tr:last-child th,
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    td.num {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .message {
+      margin-top: 16px;
+      padding: 16px 18px;
+      border-radius: 14px;
+      background: #f7fbff;
+      border: 1px solid #d9e8fb;
+      font-size: 14px;
+    }
+
+    .message strong {
+      color: var(--navy);
+    }
+
+    .message--draft {
+      background: var(--warn-bg);
+      border-color: var(--warn-line);
+      color: var(--warn-text);
+    }
+
+    .message--draft strong {
+      color: var(--warn-text);
+    }
+
+    .cols {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(280px, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .box {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fbfdff;
+    }
+
+    .box h3 {
+      margin-top: 0;
+    }
+
+    .flat-fee {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 22px 24px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #102f5a 0%, #1b5aa6 100%);
+      color: #fff;
+      box-shadow: 0 10px 22px rgba(15, 43, 84, .18);
+    }
+
+    .flat-fee__label {
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .flat-fee__amount {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: .01em;
+    }
+
+    .flat-fee__amount small {
+      font-size: 14px;
+      font-weight: 700;
+      opacity: .9;
+    }
+
+    .flow {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(180px, 1fr));
+      gap: 14px;
+    }
+
+    .flow__step {
+      padding: 18px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: #ffffff;
+      position: relative;
+      min-height: 184px;
+    }
+
+    .flow__step::after {
+      content: "→";
+      position: absolute;
+      right: -14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 22px;
+      color: var(--navy-2);
+      font-weight: 700;
+    }
+
+    .flow__step:last-child::after {
+      content: "";
+    }
+
+    .flow__num {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 999px;
+      background: var(--navy);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .flow__step h4 {
+      margin: 0 0 4px;
+      font-size: 16px;
+      color: var(--navy);
+      line-height: 1.45;
+    }
+
+    .flow__step p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .footer {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .notes {
+      padding-left: 20px;
+      margin: 12px 0 0;
+    }
+
+    .notes li {
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 1200px) {
+      .cards {
+        grid-template-columns: repeat(3, minmax(180px, 1fr));
       }
     }
 
-    @media (max-width: 760px){
-      header{padding:56px 0 42px;}
-      .hero-points,
-      .grid-2,
-      .grid-3,
-      .flow{
-        grid-template-columns:1fr;
+    @media (max-width: 1024px) {
+      .cards,
+      .routes,
+      .flow {
+        grid-template-columns: repeat(2, minmax(220px, 1fr));
       }
-      .section-card{padding:22px;}
-      h2{font-size:25px;}
-      .nav-inner{padding:10px 0;}
-      .nav-link{font-size:13px;padding:9px 12px;}
+
+      .flow__step::after {
+        content: "";
+      }
+    }
+
+    @media (max-width: 820px) {
+      .glossary,
+      .cols {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 22px 18px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        width: min(calc(100% - 20px), var(--max));
+        padding-top: 14px;
+      }
+
+      .hero {
+        padding: 28px 20px;
+        border-radius: 18px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .hero__copy {
+        font-size: 18px;
+      }
+
+      .nav {
+        position: static;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scrollbar-width: thin;
+        padding: 8px;
+      }
+
+      .nav a {
+        font-size: 13px;
+        padding: 9px 12px;
+      }
+
+      .section {
+        padding: 20px 14px;
+        border-radius: 18px;
+      }
+
+      .section h2 {
+        font-size: 24px;
+      }
+
+      .cards,
+      .routes,
+      .flow,
+      .glossary,
+      .cols {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        min-height: auto;
+      }
+
+      .flow__step {
+        min-height: auto;
+      }
+
+      .flat-fee {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 18px;
+      }
+
+      .flat-fee__amount {
+        font-size: 26px;
+      }
+
+      th, td {
+        padding: 12px 12px;
+        font-size: 13px;
+      }
+
+      caption {
+        padding: 14px 14px 0;
+        font-size: 14px;
+      }
+
+      .message,
+      .box,
+      .route,
+      .glossary__item,
+      .flow__step {
+        padding: 16px;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="wrap">
-      <span class="eyebrow">GRDM REFERRAL MEMBER PROGRAM</span>
-      <h1>GRDM紹介会員プログラム</h1>
+  <main class="page">
+
+    <header class="hero">
+      <span class="hero__tag">OWNER STATUS PROGRAM</span>
+      <h1>GRDMオーナーステータスプログラム</h1>
+      <p class="hero__copy">積み重ねるほど、特別なオーナー体験へ。</p>
+      <p class="hero__lead">
+        当社との取引実績やご紹介実績に応じて、会員ステータスと優遇サービスが広がるオーナー向けプログラムです。
+        上位ステータスになるほど、情報・サポート・体験のすべてにおいて、より上質なサービスをご提供します。
+      </p>
+    </header>
+
+    <nav class="nav" aria-label="ページ内ナビゲーション">
+      <a href="#about">概要</a>
+      <a href="#status">ステータス一覧</a>
+      <a href="#terms">用語説明</a>
+      <a href="#routes">昇格イメージ</a>
+      <a href="#criteria">ステータス基準</a>
+      <a href="#benefits">優遇サービス</a>
+      <a href="#fee">ご紹介報酬</a>
+      <a href="#flow">ご紹介の流れ</a>
+      <a href="#notes">注意事項</a>
+    </nav>
+
+    <section class="section" id="about">
+      <h2>概要</h2>
       <p class="lead">
-        物件のご購入がまだない方でもご登録いただける、ご紹介協力型の会員プログラムです。
-        ご自身で不動産の専門説明や営業活動を行っていただく必要はなく、
-        <strong>信頼できる方をご紹介いただき、当社との面談機会づくりにご協力いただく</strong>ことを前提としています。
+        GRDMオーナーステータスプログラムは、当社との累計取引件数（購入・買取）やご紹介実績に応じて、会員ステータスに応じた優遇サービスをご利用いただける制度です。
+        初回の判定は累計取引件数（購入・買取）を基本とし、その後は4つの基準のいずれかを満たした時点で昇格対象となります。
+      </p>
+      <div class="pill-row">
+        <span class="pill">累計取引件数で昇格</span>
+        <span class="pill">紹介決済数で昇格</span>
+        <span class="pill">紹介人数で昇格</span>
+        <span class="pill">紹介実施数（J）で昇格</span>
+      </div>
+    </section>
+
+    <section class="section" id="status">
+      <h2>ステータス一覧</h2>
+      <p class="lead">会員ステータスは、以下の5つです。GOC帯からGGC帯へ進むほど、サービス内容もよりプレミアムになります。</p>
+      <div class="cards">
+        <article class="card crystal">
+          <span class="label crystal-l">GOC</span>
+          <h3>クリスタル</h3>
+          <span class="sub-en">Grdm Owners Club</span>
+          <p>制度の入口となる基本ステータスです。</p>
+          <div class="card__meta">
+            <strong>0件・1件 / 1決済 / 1名 / 3J</strong>
+            <span>初回登録帯としての位置づけを持ち、4つのOR条件の起点となるステータスです。</span>
+          </div>
+        </article>
+
+        <article class="card sapphire-card">
+          <span class="label sapphire-l">GOC</span>
+          <h3>サファイア</h3>
+          <span class="sub-en">Grdm Owners Club</span>
+          <p>専任担当などの優遇が始まる中位ステータスです。</p>
+          <div class="card__meta">
+            <strong>2件 / 3決済 / 3名 / 9J</strong>
+            <span>4つのOR条件のいずれかで昇格対象。</span>
+          </div>
+        </article>
+
+        <article class="card premier">
+          <span class="label premier-l">GOC</span>
+          <h3>プレミア</h3>
+          <span class="sub-en">Grdm Owners Club</span>
+          <p>優先案内・資産レポートが広がる上位ステータスです。</p>
+          <div class="card__meta">
+            <strong>3件 / 6決済 / 6名 / 18J</strong>
+            <span>情報・サポートの幅がさらに広がります。</span>
+          </div>
+        </article>
+
+        <article class="card diamond-card">
+          <span class="label diamond-l">GGC</span>
+          <h3>ダイヤモンド</h3>
+          <span class="sub-en">Grdm Global Club</span>
+          <p>上級オーナー向けのハイグレードステータスです。</p>
+          <div class="card__meta">
+            <strong>10件 / 10決済 / 10名 / 30J</strong>
+            <span>GGC帯ならではのプレミアムな優遇をご用意します。</span>
+          </div>
+          <span class="premium-note">PREMIUM STATUS</span>
+        </article>
+
+        <article class="card metal-card">
+          <span class="label metal-l">GGC</span>
+          <h3>ダイヤモンドメタル</h3>
+          <span class="sub-en">Grdm Global Club</span>
+          <p>本プログラムの最上位ステータスです。</p>
+          <div class="card__meta">
+            <strong>20件 / 20決済 / 20名 / 60J</strong>
+            <span>最上位会員として、より特別なご案内・体験をご提供します。</span>
+          </div>
+          <span class="premium-note">TOP PREMIUM</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="terms">
+      <h2>用語説明</h2>
+      <p class="lead">本プログラムでは、以下の用語を使用します。</p>
+      <div class="glossary">
+        <div class="glossary__item">
+          <h4>GOC（Grdm Owners Club／グラマネ オーナーズ クラブ）</h4>
+          <p>当社オーナー会員向けのステータス帯です。クリスタル／サファイア／プレミアの3ステータスで構成されます。</p>
+        </div>
+        <div class="glossary__item">
+          <h4>GGC（Grdm Global Club／グラマネ グローバル クラブ）</h4>
+          <p>GOCの上位にあたるハイグレードステータス帯です。ダイヤモンド／ダイヤモンドメタルの2ステータスで構成されます。</p>
+        </div>
+        <div class="glossary__item">
+          <h4>累計取引件数（購入・買取）</h4>
+          <p>当社からご購入いただいた件数に加え、お客様ご所有物件を当社が買い取った件数を合算した件数です。</p>
+        </div>
+        <div class="glossary__item">
+          <h4>紹介決済数</h4>
+          <p>ご紹介の結果、ご購入・決済に至った件数です。</p>
+        </div>
+        <div class="glossary__item">
+          <h4>紹介人数</h4>
+          <p>ご紹介の結果、決済に至った方の人数です。初回に2件口（同時に2件）をご購入された場合でも、1名としてカウントします。</p>
+        </div>
+        <div class="glossary__item">
+          <h4>紹介実施数（J）</h4>
+          <p>当社営業担当による事前確認電話を行い、相手の温度感や反応を確認したうえで「実施」と判断された件数です。実施後にローン却下となった場合でも、実施数には含みます。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="routes">
+      <h2>昇格イメージ</h2>
+      <p class="lead">ステータスは、以下4つの基準のいずれかを満たした場合に判定・昇格します。</p>
+      <div class="routes">
+        <div class="route">
+          <span class="route__num">1</span>
+          <h4>累計取引件数（購入・買取）</h4>
+          <p>当社でのご購入件数と、当社による買取件数を合算した件数です。</p>
+        </div>
+        <div class="route">
+          <span class="route__num">2</span>
+          <h4>紹介決済数</h4>
+          <p>ご紹介の結果、ご購入・決済に至った件数です。</p>
+        </div>
+        <div class="route">
+          <span class="route__num">3</span>
+          <h4>紹介人数</h4>
+          <p>ご紹介の結果、決済に至った人数です。</p>
+        </div>
+        <div class="route">
+          <span class="route__num">4</span>
+          <h4>紹介実施数（J）</h4>
+          <p>事前確認電話を経て、実施と判断された面談・商談件数です。</p>
+        </div>
+      </div>
+      <div class="or-banner">上記4つのうち、いずれかの基準を満たすことでステータスアップの対象となります（OR条件）</div>
+    </section>
+
+    <section class="section" id="criteria">
+      <h2>ステータス基準</h2>
+      <p class="lead">初回のステータス判定は累計取引件数（購入・買取）を基本とし、その後の昇格判定は4つの基準のいずれかを満たした時点で対象となります。</p>
+      <div class="table-wrap">
+        <table>
+          <caption>ステータス別 判定基準（4つのOR条件）</caption>
+          <thead>
+            <tr>
+              <th scope="col">ステータス</th>
+              <th scope="col">累計取引件数<br />（購入・買取）</th>
+              <th scope="col">紹介決済数</th>
+              <th scope="col">紹介人数</th>
+              <th scope="col">紹介実施数（J）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">GOCクリスタル</th>
+              <td class="num">0件または1件</td>
+              <td class="num">1件</td>
+              <td class="num">1名</td>
+              <td class="num">3J</td>
+            </tr>
+            <tr>
+              <th scope="row">GOCサファイア</th>
+              <td class="num">2件</td>
+              <td class="num">3件</td>
+              <td class="num">3名</td>
+              <td class="num">9J</td>
+            </tr>
+            <tr>
+              <th scope="row">GOCプレミア</th>
+              <td class="num">3件</td>
+              <td class="num">6件</td>
+              <td class="num">6名</td>
+              <td class="num">18J</td>
+            </tr>
+            <tr>
+              <th scope="row">GGCダイヤモンド</th>
+              <td class="num premium-cell">10件</td>
+              <td class="num premium-cell">10件</td>
+              <td class="num premium-cell">10名</td>
+              <td class="num premium-cell">30J</td>
+            </tr>
+            <tr>
+              <th scope="row">GGCダイヤモンドメタル</th>
+              <td class="num premium-cell">20件</td>
+              <td class="num premium-cell">20件</td>
+              <td class="num premium-cell">20名</td>
+              <td class="num premium-cell">60J</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="message">
+        <strong>判定ルール</strong><br />
+        上記4つの基準は <strong>いずれかを満たした時点</strong> でステータスアップの対象となります。GOCクリスタルは、初回登録帯および1件目の取引実績を含む基本ステータスとして位置づけます。
+      </div>
+      <div class="message">
+        <strong>10件以上のステータスについて</strong><br />
+        GGCダイヤモンドおよびGGCダイヤモンドメタルの累計取引件数（購入・買取）判定においては、ご夫婦で当社物件をお持ちの場合、所定条件のもと合算できる場合があります。
+      </div>
+    </section>
+
+    <section class="section" id="benefits">
+      <h2>優遇サービス一覧 <span class="badge-draft">仮</span></h2>
+      <p class="lead">上位ステータスになるほど、情報・サポート・体験の優遇が広がります。</p>
+      <div class="table-wrap">
+        <table>
+          <caption>会員ステータス別 優遇サービス一覧（仮）</caption>
+          <thead>
+            <tr>
+              <th scope="col">サービス内容</th>
+              <th scope="col">GOCクリスタル</th>
+              <th scope="col">GOCサファイア</th>
+              <th scope="col">GOCプレミア</th>
+              <th scope="col" class="premium-head">GGCダイヤモンド</th>
+              <th scope="col" class="premium-head">GGCダイヤモンドメタル</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">専任担当</th><td>-</td><td>◯</td><td>◯</td><td class="premium-cell">◯</td><td class="premium-cell">◯</td></tr>
+            <tr><th scope="row">新規物件の優先案内</th><td>-</td><td>-</td><td>◯</td><td class="premium-cell">◯</td><td class="premium-cell">◯</td></tr>
+            <tr><th scope="row">年次資産レポート</th><td>-</td><td>-</td><td>◯</td><td class="premium-cell">◯</td><td class="premium-cell">◯</td></tr>
+            <tr><th scope="row">セミナー・勉強会</th><td>◯</td><td>◯</td><td>◯</td><td class="premium-cell">◯</td><td class="premium-cell">◯</td></tr>
+            <tr><th scope="row">限定交流会</th><td>-</td><td>-</td><td>◯</td><td class="premium-cell">◯</td><td class="premium-cell">◯</td></tr>
+            <tr><th scope="row">代表個別面談</th><td>-</td><td>-</td><td>◯</td><td class="premium-cell">◯</td><td class="premium-cell">◯</td></tr>
+            <tr><th scope="row">会員証</th><td>◯</td><td>◯</td><td>◯</td><td class="premium-cell">◯</td><td class="premium-cell">◯</td></tr>
+            <tr><th scope="row">修繕費サポート</th><td>-</td><td>-</td><td>-</td><td class="premium-cell">△</td><td class="premium-cell">△</td></tr>
+            <tr><th scope="row">GOC賞（国内旅行）</th><td>-</td><td>◯</td><td>◯</td><td class="premium-cell">-</td><td class="premium-cell">-</td></tr>
+            <tr><th scope="row">GGC賞（海外旅行）</th><td>-</td><td>-</td><td>-</td><td class="premium-cell">◯</td><td class="premium-cell">◯</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="message message--draft">
+        <strong>優遇サービス一覧（仮）について</strong><br />
+        本表は現時点の案です。適用条件・内容・上限等は、今後調整となる場合があります。
+      </div>
+    </section>
+
+    <section class="section" id="fee">
+      <h2>ご紹介報酬</h2>
+      <p class="lead">
+        オーナー会員の皆さまには、ご紹介による報酬制度をご用意しています。
+        紹介者とご紹介先の双方にメリットがある設計とし、ご紹介者様にはステータスに応じた報酬を、
+        紹介されて新規でご購入された方には一律の報酬をお支払いします。
       </p>
 
-      <div class="hero-points">
-        <div class="hero-point">
-          <strong>未購入でも登録可能</strong>
-          <span>GRDM紹介会員として、ご紹介制度の対象になります。</span>
+      <h3>① 紹介者の方への報酬</h3>
+      <p class="lead">
+        ご紹介者様には、ご自身の会員ステータスに応じた「初回紹介フィー」と「リピートフィー」をお支払いします。
+        リピートフィー（買い増し時の報酬）は、紹介者の方のみが対象です。
+      </p>
+
+      <div class="cols">
+        <div class="box">
+          <h3>初回紹介フィー</h3>
+          <p>ご紹介したお客様が、当社で初めて物件をご購入・決済された際に、紹介者の方へお支払いする報酬です。</p>
         </div>
-        <div class="hero-point">
-          <strong>専門説明は不要</strong>
-          <span>物件説明・提案・契約実務・クロージングは当社が対応します。</span>
-        </div>
-        <div class="hero-point">
-          <strong>ご紹介に応じて報酬対象</strong>
-          <span>初回紹介フィー、リピートフィーの考え方を明確にご案内します。</span>
+        <div class="box">
+          <h3>リピートフィー<span style="font-size:13px;color:var(--navy);font-weight:700;">（紹介者のみ）</span></h3>
+          <p>ご紹介したお客様が買い増しご購入を行い、決済に至った際に、紹介者の方へお支払いする報酬です。</p>
         </div>
       </div>
-    </div>
-  </header>
 
-  <nav>
-    <div class="nav-inner">
-      <a class="nav-link" href="#overview">概要</a>
-      <a class="nav-link" href="#position">会員区分</a>
-      <a class="nav-link" href="#points">参加イメージ</a>
-      <a class="nav-link" href="#rewards">紹介報酬</a>
-      <a class="nav-link" href="#flow">ご紹介の流れ</a>
-      <a class="nav-link" href="#owner">オーナー制度との関係</a>
-      <a class="nav-link" href="#notes">注意事項</a>
-    </div>
-  </nav>
+      <div class="table-wrap">
+        <table>
+          <caption>会員ステータス別 紹介者報酬</caption>
+          <thead>
+            <tr>
+              <th scope="col">ステータス</th>
+              <th scope="col">初回紹介フィー</th>
+              <th scope="col">リピートフィー<br />（紹介者のみ）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">GOCクリスタル</th><td class="num">30万円</td><td class="num">5万円</td></tr>
+            <tr><th scope="row">GOCサファイア</th><td class="num">50万円</td><td class="num">10万円</td></tr>
+            <tr><th scope="row">GOCプレミア</th><td class="num">70万円</td><td class="num">20万円</td></tr>
+            <tr><th scope="row">GGCダイヤモンド</th><td class="num">150万円</td><td class="num">30万円</td></tr>
+            <tr><th scope="row">GGCダイヤモンドメタル</th><td class="num">200万円</td><td class="num">50万円</td></tr>
+          </tbody>
+        </table>
+      </div>
 
-  <main class="wrap">
-    <section id="overview">
-      <div class="section-card">
-        <h2>プログラム概要</h2>
-        <p class="section-desc">
-          GRDM紹介会員プログラムは、未購入の方でも参加できる会員制度です。
-          ご紹介いただいた方が、当社との面談・商談を経て物件購入に至った場合、
-          所定の条件に基づいてご紹介報酬の対象となります。
-        </p>
+      <h3>② 紹介されて新規でご購入された方への報酬</h3>
+      <p class="lead">
+        ご紹介を受けて新規でご購入された方には、ステータスにかかわらず一律の報酬をお支払いします。
+      </p>
 
-        <div class="notice">
-          <strong>この制度の考え方</strong><br />
-          本制度は、お客様に不動産の専門知識を求めたり、営業行為をお願いしたりするものではありません。<br />
-          あくまで、<strong>良いご縁をつないでいただく協力体制</strong>を前提とし、
-          詳細な説明・ご提案・契約実務・コンプライアンス対応は当社が責任を持って行います。
+      <div class="flat-fee">
+        <span class="flat-fee__label">新規ご購入者さま（ご紹介先）への報酬</span>
+        <span class="flat-fee__amount">一律 30万円 <small>（ステータス問わず）</small></span>
+      </div>
+
+      <div class="message">
+        <strong>新規ご購入者さまのリピートフィーについて</strong><br />
+        新規でご購入された方ご自身への報酬は、初回の一律30万円のみです。買い増し時のリピートフィーは、紹介者の方のみが対象となります。
+      </div>
+
+      <div class="message">
+        <strong>紹介者・ご紹介先の双方へのフィーについて</strong><br />
+        双方にメリットがある制度設計として、ご紹介者様にはステータスに応じた報酬（初回30〜200万円）を、紹介されて新規でご購入された方には一律30万円をお支払いします。
+      </div>
+
+      <div class="message">
+        <strong>初回に複数件ご購入された場合の取り扱い</strong><br />
+        ご紹介先のお客様が初回のご購入で2件口（同時に2件）をご購入された場合、紹介人数は1名としてカウントし、紹介者への初回紹介フィー・新規ご購入者への一律報酬は、それぞれ1件分のみのお支払いとなります。<br />
+        その後、3件目のご購入（買い増し）からは、所定条件に基づき紹介者の方へのリピートフィーの対象となります。
+      </div>
+    </section>
+
+    <section class="section" id="flow">
+      <h2>ご紹介の流れ</h2>
+      <p class="lead">ご紹介から報酬発生までのイメージです。必要に応じて、ご紹介者様にも同席・ご協力をお願いしながら進めます。</p>
+      <div class="flow">
+        <div class="flow__step">
+          <span class="flow__num">STEP 1</span>
+          <h4>ご紹介・事前共有</h4>
+          <p>ご家族・ご友人・同僚など、関心をお持ちの方をご紹介ください。事前に簡単なご状況共有をお願いします。</p>
+        </div>
+        <div class="flow__step">
+          <span class="flow__num">STEP 2</span>
+          <h4>事前確認・面談実施</h4>
+          <p>当社営業担当が事前確認電話を行い、相手の温度感や反応を確認したうえで、面談・商談を実施します。必要に応じてご紹介者様にも同席・後押しのご協力をお願いする場合があります（実施1件＝1J）。</p>
+        </div>
+        <div class="flow__step">
+          <span class="flow__num">STEP 3</span>
+          <h4>ご契約・決済</h4>
+          <p>ご紹介先が初めてご購入・決済された段階で、紹介者の方の初回紹介フィーと、新規ご購入者の方への一律報酬（30万円）が発生します。</p>
+        </div>
+        <div class="flow__step">
+          <span class="flow__num">STEP 4</span>
+          <h4>継続フォロー・買い増し</h4>
+          <p>ご紹介後も継続的にフォローし、3件目以降の買い増し時には、紹介者の方へのリピートフィーの対象となります。</p>
         </div>
       </div>
     </section>
 
-    <section id="position">
-      <div class="section-card">
-        <h2>会員区分の考え方</h2>
-        <p class="section-desc">
-          GRDMには、未購入の方向けの「紹介会員」と、購入実績のある「オーナー会員」があります。
-        </p>
-
-        <div class="table-wrap">
-          <table>
-            <colgroup>
-              <col style="width:26%">
-              <col style="width:24%">
-              <col style="width:50%">
-            </colgroup>
-            <thead>
-              <tr>
-                <th>区分</th>
-                <th>対象</th>
-                <th>内容</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>GRDM紹介会員</td>
-                <td>未購入者を含む会員</td>
-                <td>ご紹介制度の対象となり、所定条件に応じて紹介報酬を受け取ることができます。</td>
-              </tr>
-              <tr>
-                <td>GRDMオーナー会員</td>
-                <td>当社から物件を購入している会員</td>
-                <td>GOC / GGC の各ステータスと、オーナー向け優遇サービスの対象となります。</td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="table-note">
-            ※ オーナー向けのステータス制度・優遇サービスは、原則として物件をご購入いただいた会員様が対象です。
-          </div>
-        </div>
-      </div>
+    <section class="section" id="notes">
+      <h2>注意事項</h2>
+      <ul class="notes">
+        <li>本プログラムの優遇サービスは、当社から物件をご購入いただいているオーナー会員の方が対象です。</li>
+        <li>GOCクリスタルは初回登録帯を兼ねる基本ステータスです。</li>
+        <li>会員ステータスの適用条件、各サービス内容、適用範囲および上限は、当社所定の基準に基づきます。</li>
+        <li>ご紹介報酬の適用には、当社所定の条件確認が必要となります。</li>
+        <li>ご紹介者様への初回紹介フィー・リピートフィーは、ご紹介者様の会員ステータスに応じて決定します。</li>
+        <li>紹介されて新規でご購入された方には、ステータスにかかわらず一律30万円をお支払いします。買い増し時のリピートフィーは、紹介者の方のみが対象です。</li>
+        <li>ご紹介先のお客様が初回のご購入で2件口（同時に2件）をご購入された場合、紹介人数は1名、初回紹介フィーおよび新規ご購入者への一律報酬は1件分のみとなります。3件目以降の買い増しからは、紹介者の方へのリピートフィーの対象となります。</li>
+        <li>紹介人数は、決済に至った人数を基準としてカウントします。</li>
+        <li>紹介実施数（J）は、当社営業担当による事前確認電話を経て「実施」と判断された面談・商談件数を1Jとしてカウントします。面談設定のみ・日程調整のみの場合は対象外です。</li>
+        <li>実施後にローン却下となった場合でも、紹介実施数（J）には含みます。</li>
+        <li>GGCダイヤモンドおよびGGCダイヤモンドメタルの累計取引件数判定においては、ご夫婦で当社物件をお持ちの場合、所定条件のもと合算できる場合があります。</li>
+        <li>紹介料は税務上、雑所得として確定申告が必要となる場合があります。詳細は税理士または所轄税務署へご確認ください。</li>
+        <li>制度内容は、予告なく変更となる場合があります。</li>
+      </ul>
     </section>
 
-    <section id="points">
-      <div class="section-card">
-        <h2>紹介会員としての参加イメージ</h2>
-        <p class="section-desc">
-          紹介会員の役割は、営業や契約対応ではなく、信頼できる方との接点づくりです。
-        </p>
-
-        <div class="grid-3">
-          <div class="point-card">
-            <span class="status-chip">POINT 1</span>
-            <h3>ご紹介先の橋渡し</h3>
-            <p>
-              不動産投資や資産形成に関心がありそうな方をご紹介いただき、
-              当社との接点づくりにご協力いただきます。
-            </p>
-          </div>
-          <div class="point-card">
-            <span class="status-chip">POINT 2</span>
-            <h3>面談機会のサポート</h3>
-            <p>
-              面談・商談の日程調整や、必要に応じた同席など、
-              面談実施までのサポートが主な協力内容です。
-            </p>
-          </div>
-          <div class="point-card">
-            <span class="status-chip">POINT 3</span>
-            <h3>詳細説明は当社が担当</h3>
-            <p>
-              物件内容、収支、契約条件、各種ご案内、クロージングはすべて当社が対応します。
-              ご本人に専門説明は求めません。
-            </p>
-          </div>
-        </div>
-
-        <div class="callout">
-          <strong>コンプライアンスに配慮した運用</strong><br />
-          お客様がご紹介先に対して、物件の詳細説明や勧誘行為を行う前提ではありません。
-          制度上評価するのは、当社との面談機会づくりや信頼あるご紹介へのご協力です。
-        </div>
-      </div>
-    </section>
-
-    <section id="rewards">
-      <div class="section-card">
-        <h2>紹介報酬の考え方</h2>
-        <p class="section-desc">
-          紹介報酬は、紹介先の購入状況に応じて「初回紹介フィー」と「リピートフィー」に分かれます。
-        </p>
-
-        <div class="table-wrap">
-          <table>
-            <colgroup>
-              <col style="width:24%">
-              <col style="width:38%">
-              <col style="width:38%">
-            </colgroup>
-            <thead>
-              <tr>
-                <th>報酬区分</th>
-                <th>発生条件</th>
-                <th>考え方</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>初回紹介フィー</td>
-                <td>紹介した方が、当社で初めて物件を購入・決済した場合</td>
-                <td>その方との最初のご成約に対して支払われる紹介報酬です。</td>
-              </tr>
-              <tr>
-                <td>リピートフィー</td>
-                <td>紹介した方が、2件目以降の追加購入・決済をした場合</td>
-                <td>継続的なお取引につながった際に支払われる報酬です。</td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="table-note">
-            ※ ご紹介された方が初回に2件口で購入された場合でも、<strong>1名としてカウント</strong>し、<strong>初回紹介フィーは1件分のみ</strong>のお支払いとなります。<br />
-            ※ その後、同じ方による<strong>2件目以降の追加購入</strong>があった場合に、リピートフィーの対象となります。<br />
-            ※ 未購入の紹介会員に適用する具体的な報酬金額・条件は、当社所定の基準に基づきます。
-          </div>
-        </div>
-
-        <div class="notice">
-          <strong>紹介実施（J）について</strong><br />
-          1J ＝ 面談・商談が実施できた件数です。<br />
-          日程調整のみ、連絡先共有のみではJとしてカウントしません。
-        </div>
-      </div>
-    </section>
-
-    <section id="flow">
-      <div class="section-card">
-        <h2>ご紹介の流れ</h2>
-        <p class="section-desc">
-          ご紹介から面談、そして成約後の報酬対象までの基本フローです。
-        </p>
-
-        <div class="flow">
-          <div class="step-card">
-            <span class="step-no">STEP 1</span>
-            <h3>ご紹介先の共有</h3>
-            <p>
-              当社サービスに関心をお持ちいただけそうな方をご紹介ください。
-            </p>
-            <ul>
-              <li>詳しい商品説明は不要です</li>
-              <li>まずはご縁をつないでいただくイメージです</li>
-            </ul>
-          </div>
-
-          <div class="step-card">
-            <span class="step-no">STEP 2</span>
-            <h3>面談機会の設定</h3>
-            <p>
-              ご紹介先と当社の面談・商談日程の設定にご協力いただきます。
-            </p>
-            <ul>
-              <li>実際に面談が行われると1J対象</li>
-              <li>必要に応じて同席も可能です</li>
-            </ul>
-          </div>
-
-          <div class="step-card">
-            <span class="step-no">STEP 3</span>
-            <h3>当社が説明・提案を実施</h3>
-            <p>
-              物件説明、条件提示、収支のご案内、契約実務、クロージングは当社が担当します。
-            </p>
-            <ul>
-              <li>お客様に専門説明は求めません</li>
-              <li>法令・コンプライアンス面も当社が対応します</li>
-            </ul>
-          </div>
-
-          <div class="step-card">
-            <span class="step-no">STEP 4</span>
-            <h3>ご成約・継続購入で報酬反映</h3>
-            <p>
-              初回購入時は初回紹介フィー、
-              その後の<strong>2件目以降の追加購入</strong>ではリピートフィーの対象となります。
-            </p>
-            <ul>
-              <li>初回2件口購入でも新規1名扱い</li>
-              <li>初回フィーは1件分のみ支給</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="owner">
-      <div class="section-card">
-        <h2>オーナー制度との関係</h2>
-        <p class="section-desc">
-          将来的にご自身で物件をご購入いただいた場合は、GRDMオーナー会員として
-          オーナー向けステータス制度の対象になります。
-        </p>
-
-        <div class="grid-2">
-          <div class="info-card">
-            <span class="badge">紹介会員</span>
-            <h3>未購入でも参加できる制度</h3>
-            <p>
-              ご紹介制度の対象として、面談機会づくりやご紹介実績に応じた報酬対象になります。
-            </p>
-          </div>
-          <div class="info-card">
-            <span class="badge">オーナー会員</span>
-            <h3>購入後はステータス制度へ</h3>
-            <p>
-              当社から物件をご購入いただくと、GOC / GGC の各ステータス、
-              および優遇サービスの対象となります。
-            </p>
-          </div>
-        </div>
-
-        <div class="callout">
-          <strong>ご案内</strong><br />
-          オーナー制度では、累計取引件数（購入・買取）・紹介決済数・紹介人数・紹介実施数（J）などをもとに、
-          ステータス判定や昇格判定が行われます。
-        </div>
-      </div>
-    </section>
-
-    <section id="notes">
-      <div class="section-card">
-        <h2>注意事項</h2>
-        <ul class="notes">
-          <li>GRDM紹介会員は、未購入の方でも登録可能です。</li>
-          <li>ご紹介制度は、信頼できる方との接点づくり・面談機会づくりへのご協力を前提としています。</li>
-          <li>お客様ご本人に、不動産の専門説明や契約行為をお願いする制度ではありません。</li>
-          <li>物件説明、提案、契約実務、クロージング、法令対応は当社が責任を持って行います。</li>
-          <li>紹介実施数（J）は、面談・商談が実施された場合にカウントします。日程調整のみでは対象になりません。</li>
-          <li>紹介された方が初回に2件口で購入された場合でも、1名としてカウントし、初回紹介フィーは1件分のみとなります。</li>
-          <li>その後、同じ方による2件目以降の追加購入があった場合に、リピートフィーの対象となります。</li>
-          <li>未購入の紹介会員に対する具体的な紹介報酬金額・支給条件は、当社所定の基準に基づきます。</li>
-          <li>紹介料は雑所得として確定申告が必要となる場合があります。詳細は税理士または所轄税務署へご確認ください。</li>
-          <li>制度内容は、予告なく変更となる場合があります。</li>
-        </ul>
-      </div>
-    </section>
-
-    <footer>
-      © GRDM Referral Member Program
+    <footer class="footer">
+      <p>© GRDM Owner Status Program</p>
     </footer>
   </main>
 </body>
