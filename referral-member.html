@@ -219,7 +219,7 @@
     .cards {
       margin-top: 18px;
       display: grid;
-      grid-template-columns: repeat(5, minmax(180px, 1fr));
+      grid-template-columns: repeat(3, minmax(220px, 1fr));
       gap: 14px;
     }
 
@@ -341,7 +341,7 @@
     .routes {
       margin-top: 18px;
       display: grid;
-      grid-template-columns: repeat(4, minmax(180px, 1fr));
+      grid-template-columns: repeat(2, minmax(220px, 1fr));
       gap: 14px;
     }
 
@@ -402,7 +402,7 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 860px;
+      min-width: 760px;
     }
 
     caption {
@@ -493,13 +493,8 @@
       margin-top: 0;
     }
 
-    .flat-fee {
+    .frame-banner {
       margin-top: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
       padding: 22px 24px;
       border-radius: 16px;
       background: linear-gradient(135deg, #102f5a 0%, #1b5aa6 100%);
@@ -507,21 +502,16 @@
       box-shadow: 0 10px 22px rgba(15, 43, 84, .18);
     }
 
-    .flat-fee__label {
-      font-weight: 700;
-      font-size: 16px;
+    .frame-banner h3 {
+      margin: 0 0 6px;
+      color: #fff;
+      font-size: 18px;
     }
 
-    .flat-fee__amount {
-      font-size: 30px;
-      font-weight: 800;
-      letter-spacing: .01em;
-    }
-
-    .flat-fee__amount small {
+    .frame-banner p {
+      margin: 0;
       font-size: 14px;
-      font-weight: 700;
-      opacity: .9;
+      opacity: .95;
     }
 
     .flow {
@@ -593,12 +583,6 @@
 
     .notes li {
       margin-bottom: 8px;
-    }
-
-    @media (max-width: 1200px) {
-      .cards {
-        grid-template-columns: repeat(3, minmax(180px, 1fr));
-      }
     }
 
     @media (max-width: 1024px) {
@@ -682,16 +666,6 @@
         min-height: auto;
       }
 
-      .flat-fee {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 18px;
-      }
-
-      .flat-fee__amount {
-        font-size: 26px;
-      }
-
       th, td {
         padding: 12px 12px;
         font-size: 13px;
@@ -706,9 +680,124 @@
       .box,
       .route,
       .glossary__item,
-      .flow__step {
+      .flow__step,
+      .frame-banner {
         padding: 16px;
       }
+    }
+
+    @media print {
+      @page {
+        size: A4;
+        margin: 12mm 11mm;
+      }
+
+      html { scroll-behavior: auto; }
+
+      /* 背景色を印刷しない設定でも読めるよう、色は文字と枠線で表現する */
+      body {
+        background: #fff;
+        color: #1f2937;
+        font-size: 10.5pt;
+        line-height: 1.5;
+      }
+
+      .page { width: 100%; padding: 0; }
+
+      .nav { display: none !important; }
+
+      .section, .card, .hero, .table-wrap, .frame-banner,
+      .flow__step, .box, .message, .route, .glossary__item {
+        box-shadow: none !important;
+      }
+
+      /* ヒーロー：白地・紺文字・枠線 */
+      .hero {
+        background: #fff !important;
+        color: #153a6b !important;
+        border: 1.5px solid #153a6b;
+        border-radius: 6px;
+        padding: 16px 18px;
+      }
+      .hero h1, .hero__copy { color: #153a6b !important; }
+      .hero__lead { color: #1f2937 !important; opacity: 1 !important; }
+      .hero__tag { color: #153a6b !important; border-color: #153a6b !important; }
+
+      /* セクション */
+      .section {
+        margin-top: 12px;
+        padding: 14px 14px;
+        border-radius: 6px;
+        border: 1px solid #b9c4d4;
+      }
+      .section h2 {
+        font-size: 17pt;
+        color: #153a6b;
+        border-bottom: 1.5px solid #153a6b;
+        padding-bottom: 4px;
+      }
+      .section h3 { font-size: 12.5pt; color: #153a6b; }
+
+      h2, h3, caption { break-after: avoid; page-break-after: avoid; }
+
+      .card, .route, .flow__step, .glossary__item, .box,
+      .message, .frame-banner, .or-banner, tr {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      /* 表：白地・枠線・紺の見出し文字 */
+      thead { display: table-header-group; }
+      .table-wrap { overflow: visible !important; border: 1px solid #9aa6b6; }
+      table { min-width: 0 !important; width: 100%; font-size: 9pt; }
+      th, td { padding: 6px 8px; border-color: #9aa6b6 !important; color: #1f2937 !important; }
+      thead th, .premium-head {
+        background: #fff !important;
+        color: #153a6b !important;
+        border-bottom: 1.5px solid #153a6b !important;
+      }
+      tbody th, .premium-cell { background: #fff !important; color: #1f2937 !important; }
+
+      /* カード：白地・枠線・紺の見出し */
+      .card { background: #fff !important; border: 1px solid #9aa6b6 !important; min-height: 0; }
+      .card h3, .card__meta strong { color: #153a6b !important; }
+      .card p, .card .sub-en, .card__meta span { color: #1f2937 !important; }
+      .diamond-card, .metal-card { background: #fff !important; border: 1.5px solid #153a6b !important; }
+      .diamond-card h3, .metal-card h3,
+      .diamond-card .card__meta strong, .metal-card .card__meta strong { color: #153a6b !important; }
+      .diamond-card p, .metal-card p,
+      .diamond-card .sub-en, .metal-card .sub-en,
+      .diamond-card .card__meta span, .metal-card .card__meta span { color: #1f2937 !important; }
+
+      /* ラベル・ピル・番号：白地＋枠線＋紺文字 */
+      .label, .premium-note, .pill, .route__num, .flow__num {
+        background: #fff !important;
+        color: #153a6b !important;
+        border: 1px solid #153a6b !important;
+      }
+      .badge-draft { background: #fff !important; color: #7a5614 !important; border: 1px solid #9a7b3f !important; }
+
+      /* 強調バナー・メッセージ：白地・枠線 */
+      .frame-banner { background: #fff !important; border: 1.5px solid #153a6b; border-radius: 8px; }
+      .frame-banner h3 { color: #153a6b !important; }
+      .frame-banner p { color: #1f2937 !important; opacity: 1 !important; }
+      .message { background: #fff !important; border: 1px solid #b9c4d4 !important; }
+      .message strong { color: #153a6b !important; }
+      .message--draft { background: #fff !important; border: 1px solid #d9b873 !important; }
+      .message--draft strong { color: #7a5614 !important; }
+      .or-banner { background: #fff !important; color: #6b4d11 !important; border: 1px solid #d9b873 !important; }
+
+      /* グリッドを用紙内に収める */
+      .cards { grid-template-columns: repeat(3, 1fr); }
+      .routes { grid-template-columns: repeat(2, 1fr); }
+      .flow { grid-template-columns: repeat(2, 1fr); }
+      .glossary { grid-template-columns: repeat(2, 1fr); }
+      .cols { grid-template-columns: repeat(2, 1fr); }
+      .flow__step { min-height: 0; }
+      .flow__step::after { content: "" !important; }
+
+      a { color: inherit; text-decoration: none; }
+      .footer { margin-top: 14px; }
     }
   </style>
 </head>
@@ -718,10 +807,10 @@
     <header class="hero">
       <span class="hero__tag">OWNER STATUS PROGRAM</span>
       <h1>GRDMオーナーステータスプログラム</h1>
-      <p class="hero__copy">積み重ねるほど、特別なオーナー体験へ。</p>
+      <p class="hero__copy">ご紹介が、特別なオーナー体験につながる。</p>
       <p class="hero__lead">
-        当社との取引実績やご紹介実績に応じて、会員ステータスと優遇サービスが広がるオーナー向けプログラムです。
-        上位ステータスになるほど、情報・サポート・体験のすべてにおいて、より上質なサービスをご提供します。
+        当社で物件をご購入いただいたオーナー様（GOC会員）を対象に、ご紹介によるご成約実績に応じて、
+        会員ステータスとご紹介報酬枠が広がるプログラムです。上位ステータスになるほど、報酬枠と優遇サービスがより充実します。
       </p>
     </header>
 
@@ -740,29 +829,29 @@
     <section class="section" id="about">
       <h2>概要</h2>
       <p class="lead">
-        GRDMオーナーステータスプログラムは、当社との累計取引件数（購入・買取）やご紹介実績に応じて、会員ステータスに応じた優遇サービスをご利用いただける制度です。
-        初回の判定は累計取引件数（購入・買取）を基本とし、その後は4つの基準のいずれかを満たした時点で昇格対象となります。
+        GRDMオーナーステータスプログラムは、当社で物件をご購入いただいたオーナー様（GOC会員）向けの制度です。
+        会員ステータスは、ご紹介によるご成約件数（紹介決済数）の累計に応じて、クリスタル・サファイア・ダイヤモンドの3段階で判定・昇格します。
+        上位ステータスになるほど、1件あたりのご紹介報酬枠が大きくなり、優遇サービスも広がります。
       </p>
       <div class="pill-row">
-        <span class="pill">累計取引件数で昇格</span>
         <span class="pill">紹介決済数で昇格</span>
-        <span class="pill">紹介人数で昇格</span>
-        <span class="pill">紹介実施数（J）で昇格</span>
+        <span class="pill">当社購入件数でも昇格（サファイア）</span>
+        <span class="pill">紹介者・新規購入者の双方に還元</span>
       </div>
     </section>
 
     <section class="section" id="status">
       <h2>ステータス一覧</h2>
-      <p class="lead">会員ステータスは、以下の5つです。GOC帯からGGC帯へ進むほど、サービス内容もよりプレミアムになります。</p>
+      <p class="lead">会員ステータスは、以下の3つです。ご紹介によるご成約を積み重ねるほど、上位ステータスとより大きなご紹介報酬枠へと広がります。</p>
       <div class="cards">
         <article class="card crystal">
           <span class="label crystal-l">GOC</span>
           <h3>クリスタル</h3>
           <span class="sub-en">Grdm Owners Club</span>
-          <p>制度の入口となる基本ステータスです。</p>
+          <p>ご紹介がご成約に至った方の、入口となるステータスです。</p>
           <div class="card__meta">
-            <strong>0件・1件 / 1決済 / 1名 / 3J</strong>
-            <span>初回登録帯としての位置づけを持ち、4つのOR条件の起点となるステータスです。</span>
+            <strong>紹介決済数 1件</strong>
+            <span>ご紹介報酬枠：50万円／件</span>
           </div>
         </article>
 
@@ -770,46 +859,23 @@
           <span class="label sapphire-l">GOC</span>
           <h3>サファイア</h3>
           <span class="sub-en">Grdm Owners Club</span>
-          <p>専任担当などの優遇が始まる中位ステータスです。</p>
+          <p>報酬枠と優遇が広がる中位ステータスです。</p>
           <div class="card__meta">
-            <strong>2件 / 3決済 / 3名 / 9J</strong>
-            <span>4つのOR条件のいずれかで昇格対象。</span>
-          </div>
-        </article>
-
-        <article class="card premier">
-          <span class="label premier-l">GOC</span>
-          <h3>プレミア</h3>
-          <span class="sub-en">Grdm Owners Club</span>
-          <p>優先案内・資産レポートが広がる上位ステータスです。</p>
-          <div class="card__meta">
-            <strong>3件 / 6決済 / 6名 / 18J</strong>
-            <span>情報・サポートの幅がさらに広がります。</span>
+            <strong>紹介決済数 2件以上<br />または 当社でのご購入 3件以上</strong>
+            <span>ご紹介報酬枠：100万円／件</span>
           </div>
         </article>
 
         <article class="card diamond-card">
-          <span class="label diamond-l">GGC</span>
+          <span class="label diamond-l">GOC</span>
           <h3>ダイヤモンド</h3>
-          <span class="sub-en">Grdm Global Club</span>
-          <p>上級オーナー向けのハイグレードステータスです。</p>
-          <div class="card__meta">
-            <strong>10件 / 10決済 / 10名 / 30J</strong>
-            <span>GGC帯ならではのプレミアムな優遇をご用意します。</span>
-          </div>
-          <span class="premium-note">PREMIUM STATUS</span>
-        </article>
-
-        <article class="card metal-card">
-          <span class="label metal-l">GGC</span>
-          <h3>ダイヤモンドメタル</h3>
-          <span class="sub-en">Grdm Global Club</span>
+          <span class="sub-en">Grdm Owners Club</span>
           <p>本プログラムの最上位ステータスです。</p>
           <div class="card__meta">
-            <strong>20件 / 20決済 / 20名 / 60J</strong>
-            <span>最上位会員として、より特別なご案内・体験をご提供します。</span>
+            <strong>紹介決済数 10件以上</strong>
+            <span>ご紹介報酬枠：150万円／件</span>
           </div>
-          <span class="premium-note">TOP PREMIUM</span>
+          <span class="premium-note">TOP STATUS</span>
         </article>
       </div>
     </section>
@@ -819,121 +885,81 @@
       <p class="lead">本プログラムでは、以下の用語を使用します。</p>
       <div class="glossary">
         <div class="glossary__item">
-          <h4>GOC（Grdm Owners Club／グラマネ オーナーズ クラブ）</h4>
-          <p>当社オーナー会員向けのステータス帯です。クリスタル／サファイア／プレミアの3ステータスで構成されます。</p>
+          <h4>GOC会員（Grdm Owners Club／グラマネ オーナーズ クラブ）</h4>
+          <p>当社で物件をご購入いただいたオーナー様向けの会員プログラムです。クリスタル／サファイア／ダイヤモンドの3ステータスで構成されます。</p>
         </div>
         <div class="glossary__item">
-          <h4>GGC（Grdm Global Club／グラマネ グローバル クラブ）</h4>
-          <p>GOCの上位にあたるハイグレードステータス帯です。ダイヤモンド／ダイヤモンドメタルの2ステータスで構成されます。</p>
+          <h4>紹介決済数（紹介決済人数）</h4>
+          <p>ご紹介の結果、初めてご購入・決済に至った方の人数です。報酬は、ご紹介先の方が初めてご購入された時点で発生します。お一人が初回に2件口（同時に2件）をご購入された場合も、1件（お一人）としてカウントします。ステータス判定の主軸となります。</p>
         </div>
         <div class="glossary__item">
-          <h4>累計取引件数（購入・買取）</h4>
-          <p>当社からご購入いただいた件数に加え、お客様ご所有物件を当社が買い取った件数を合算した件数です。</p>
+          <h4>当社でのご購入件数</h4>
+          <p>当社からご購入いただいた件数です。サファイアは、ご購入3件以上でも到達いただけます。</p>
         </div>
         <div class="glossary__item">
-          <h4>紹介決済数</h4>
-          <p>ご紹介の結果、ご購入・決済に至った件数です。</p>
-        </div>
-        <div class="glossary__item">
-          <h4>紹介人数</h4>
-          <p>ご紹介の結果、決済に至った方の人数です。初回に2件口（同時に2件）をご購入された場合でも、1名としてカウントします。</p>
-        </div>
-        <div class="glossary__item">
-          <h4>紹介実施数（J）</h4>
-          <p>当社営業担当による事前確認電話を行い、相手の温度感や反応を確認したうえで「実施」と判断された件数です。実施後にローン却下となった場合でも、実施数には含みます。</p>
+          <h4>ご紹介報酬枠</h4>
+          <p>ご紹介1件（紹介決済）あたりにお支払いする報酬です。会員ステータスに応じて金額が決まります。</p>
         </div>
       </div>
     </section>
 
     <section class="section" id="routes">
       <h2>昇格イメージ</h2>
-      <p class="lead">ステータスは、以下4つの基準のいずれかを満たした場合に判定・昇格します。</p>
+      <p class="lead">ステータスは、次の基準のいずれかを満たした時点で判定・昇格します。</p>
       <div class="routes">
         <div class="route">
           <span class="route__num">1</span>
-          <h4>累計取引件数（購入・買取）</h4>
-          <p>当社でのご購入件数と、当社による買取件数を合算した件数です。</p>
+          <h4>紹介決済数で昇格（主軸）</h4>
+          <p>ご紹介がご成約に至った件数（紹介決済数）に応じて、ステータスが上がります。1件でクリスタル、2件以上でサファイア、10件以上でダイヤモンドです。</p>
         </div>
         <div class="route">
           <span class="route__num">2</span>
-          <h4>紹介決済数</h4>
-          <p>ご紹介の結果、ご購入・決済に至った件数です。</p>
-        </div>
-        <div class="route">
-          <span class="route__num">3</span>
-          <h4>紹介人数</h4>
-          <p>ご紹介の結果、決済に至った人数です。</p>
-        </div>
-        <div class="route">
-          <span class="route__num">4</span>
-          <h4>紹介実施数（J）</h4>
-          <p>事前確認電話を経て、実施と判断された面談・商談件数です。</p>
+          <h4>当社でのご購入件数で昇格</h4>
+          <p>サファイアは、当社でのご購入3件以上でも到達いただけます。</p>
         </div>
       </div>
-      <div class="or-banner">上記4つのうち、いずれかの基準を満たすことでステータスアップの対象となります（OR条件）</div>
+      <div class="or-banner">ご紹介を積み重ねるほど、上位ステータスとより大きなご紹介報酬枠へ広がります</div>
     </section>
 
     <section class="section" id="criteria">
       <h2>ステータス基準</h2>
-      <p class="lead">初回のステータス判定は累計取引件数（購入・買取）を基本とし、その後の昇格判定は4つの基準のいずれかを満たした時点で対象となります。</p>
+      <p class="lead">各ステータスの判定基準と、1件あたりのご紹介報酬枠は以下のとおりです。いずれかの基準を満たした時点で昇格対象となります。</p>
       <div class="table-wrap">
         <table>
-          <caption>ステータス別 判定基準（4つのOR条件）</caption>
+          <caption>ステータス別 判定基準・ご紹介報酬枠</caption>
           <thead>
             <tr>
               <th scope="col">ステータス</th>
-              <th scope="col">累計取引件数<br />（購入・買取）</th>
               <th scope="col">紹介決済数</th>
-              <th scope="col">紹介人数</th>
-              <th scope="col">紹介実施数（J）</th>
+              <th scope="col">当社でのご購入件数</th>
+              <th scope="col">ご紹介報酬枠<br />（1件あたり）</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <th scope="row">GOCクリスタル</th>
-              <td class="num">0件または1件</td>
+              <th scope="row">クリスタル</th>
               <td class="num">1件</td>
-              <td class="num">1名</td>
-              <td class="num">3J</td>
+              <td class="num">—</td>
+              <td class="num">50万円</td>
             </tr>
             <tr>
-              <th scope="row">GOCサファイア</th>
-              <td class="num">2件</td>
-              <td class="num">3件</td>
-              <td class="num">3名</td>
-              <td class="num">9J</td>
+              <th scope="row">サファイア</th>
+              <td class="num">2件以上</td>
+              <td class="num">または3件以上</td>
+              <td class="num">100万円</td>
             </tr>
             <tr>
-              <th scope="row">GOCプレミア</th>
-              <td class="num">3件</td>
-              <td class="num">6件</td>
-              <td class="num">6名</td>
-              <td class="num">18J</td>
-            </tr>
-            <tr>
-              <th scope="row">GGCダイヤモンド</th>
-              <td class="num premium-cell">10件</td>
-              <td class="num premium-cell">10件</td>
-              <td class="num premium-cell">10名</td>
-              <td class="num premium-cell">30J</td>
-            </tr>
-            <tr>
-              <th scope="row">GGCダイヤモンドメタル</th>
-              <td class="num premium-cell">20件</td>
-              <td class="num premium-cell">20件</td>
-              <td class="num premium-cell">20名</td>
-              <td class="num premium-cell">60J</td>
+              <th scope="row">ダイヤモンド</th>
+              <td class="num premium-cell">10件以上</td>
+              <td class="num premium-cell">—</td>
+              <td class="num premium-cell">150万円</td>
             </tr>
           </tbody>
         </table>
       </div>
       <div class="message">
         <strong>判定ルール</strong><br />
-        上記4つの基準は <strong>いずれかを満たした時点</strong> でステータスアップの対象となります。GOCクリスタルは、初回登録帯および1件目の取引実績を含む基本ステータスとして位置づけます。
-      </div>
-      <div class="message">
-        <strong>10件以上のステータスについて</strong><br />
-        GGCダイヤモンドおよびGGCダイヤモンドメタルの累計取引件数（購入・買取）判定においては、ご夫婦で当社物件をお持ちの場合、所定条件のもと合算できる場合があります。
+        上記の基準は <strong>いずれかを満たした時点</strong> でステータスアップの対象となります。サファイアは、紹介決済数2件以上のほか、当社でのご購入3件以上でも到達いただけます。ダイヤモンドへ到達しやすい設計としています。
       </div>
     </section>
 
@@ -946,24 +972,22 @@
           <thead>
             <tr>
               <th scope="col">サービス内容</th>
-              <th scope="col">GOCクリスタル</th>
-              <th scope="col">GOCサファイア</th>
-              <th scope="col">GOCプレミア</th>
-              <th scope="col" class="premium-head">GGCダイヤモンド</th>
-              <th scope="col" class="premium-head">GGCダイヤモンドメタル</th>
+              <th scope="col">クリスタル</th>
+              <th scope="col">サファイア</th>
+              <th scope="col" class="premium-head">ダイヤモンド</th>
             </tr>
           </thead>
           <tbody>
-            <tr><th scope="row">専任担当</th><td>-</td><td>◯</td><td>◯</td><td class="premium-cell">◯</td><td class="premium-cell">◯</td></tr>
-            <tr><th scope="row">新規物件の優先案内</th><td>-</td><td>-</td><td>◯</td><td class="premium-cell">◯</td><td class="premium-cell">◯</td></tr>
-            <tr><th scope="row">年次資産レポート</th><td>-</td><td>-</td><td>◯</td><td class="premium-cell">◯</td><td class="premium-cell">◯</td></tr>
-            <tr><th scope="row">セミナー・勉強会</th><td>◯</td><td>◯</td><td>◯</td><td class="premium-cell">◯</td><td class="premium-cell">◯</td></tr>
-            <tr><th scope="row">限定交流会</th><td>-</td><td>-</td><td>◯</td><td class="premium-cell">◯</td><td class="premium-cell">◯</td></tr>
-            <tr><th scope="row">代表個別面談</th><td>-</td><td>-</td><td>◯</td><td class="premium-cell">◯</td><td class="premium-cell">◯</td></tr>
-            <tr><th scope="row">会員証</th><td>◯</td><td>◯</td><td>◯</td><td class="premium-cell">◯</td><td class="premium-cell">◯</td></tr>
-            <tr><th scope="row">修繕費サポート</th><td>-</td><td>-</td><td>-</td><td class="premium-cell">△</td><td class="premium-cell">△</td></tr>
-            <tr><th scope="row">GOC賞（国内旅行）</th><td>-</td><td>◯</td><td>◯</td><td class="premium-cell">-</td><td class="premium-cell">-</td></tr>
-            <tr><th scope="row">GGC賞（海外旅行）</th><td>-</td><td>-</td><td>-</td><td class="premium-cell">◯</td><td class="premium-cell">◯</td></tr>
+            <tr><th scope="row">会員証</th><td>◯</td><td>◯</td><td class="premium-cell">◯</td></tr>
+            <tr><th scope="row">セミナー・勉強会</th><td>◯</td><td>◯</td><td class="premium-cell">◯</td></tr>
+            <tr><th scope="row">専任担当</th><td>-</td><td>◯</td><td class="premium-cell">◯</td></tr>
+            <tr><th scope="row">新規物件の優先案内</th><td>-</td><td>◯</td><td class="premium-cell">◯</td></tr>
+            <tr><th scope="row">年次資産レポート</th><td>-</td><td>◯</td><td class="premium-cell">◯</td></tr>
+            <tr><th scope="row">限定交流会</th><td>-</td><td>-</td><td class="premium-cell">◯</td></tr>
+            <tr><th scope="row">代表個別面談</th><td>-</td><td>-</td><td class="premium-cell">◯</td></tr>
+            <tr><th scope="row">修繕費サポート</th><td>-</td><td>-</td><td class="premium-cell">△</td></tr>
+            <tr><th scope="row">GOC賞（国内旅行）</th><td>-</td><td>◯</td><td class="premium-cell">◯</td></tr>
+            <tr><th scope="row">プレミアム優待旅行（海外）</th><td>-</td><td>-</td><td class="premium-cell">◯</td></tr>
           </tbody>
         </table>
       </div>
@@ -976,98 +1000,61 @@
     <section class="section" id="fee">
       <h2>ご紹介報酬</h2>
       <p class="lead">
-        オーナー会員の皆さまには、ご紹介による報酬制度をご用意しています。
-        紹介者とご紹介先の双方にメリットがある設計とし、ご紹介者様にはステータスに応じた報酬を、
-        紹介されて新規でご購入された方には一律の報酬をお支払いします。
+        ご紹介がご成約に至った際、ご紹介者様の会員ステータスに応じたご紹介報酬をお支払いします。
+        ご紹介者様だけでなく、紹介されて新規でご購入された方にもメリットのある設計です。
       </p>
-
-      <h3>① 紹介者の方への報酬</h3>
-      <p class="lead">
-        ご紹介者様には、ご自身の会員ステータスに応じた「初回紹介フィー」と「リピートフィー」をお支払いします。
-        リピートフィー（買い増し時の報酬）は、紹介者の方のみが対象です。
-      </p>
-
-      <div class="cols">
-        <div class="box">
-          <h3>初回紹介フィー</h3>
-          <p>ご紹介したお客様が、当社で初めて物件をご購入・決済された際に、紹介者の方へお支払いする報酬です。</p>
-        </div>
-        <div class="box">
-          <h3>リピートフィー<span style="font-size:13px;color:var(--navy);font-weight:700;">（紹介者のみ）</span></h3>
-          <p>ご紹介したお客様が買い増しご購入を行い、決済に至った際に、紹介者の方へお支払いする報酬です。</p>
-        </div>
-      </div>
 
       <div class="table-wrap">
         <table>
-          <caption>会員ステータス別 紹介者報酬</caption>
+          <caption>会員ステータス別 ご紹介報酬枠（1件あたり）</caption>
           <thead>
             <tr>
               <th scope="col">ステータス</th>
-              <th scope="col">初回紹介フィー</th>
-              <th scope="col">リピートフィー<br />（紹介者のみ）</th>
+              <th scope="col">ご紹介報酬枠（1件あたり）</th>
             </tr>
           </thead>
           <tbody>
-            <tr><th scope="row">GOCクリスタル</th><td class="num">30万円</td><td class="num">5万円</td></tr>
-            <tr><th scope="row">GOCサファイア</th><td class="num">50万円</td><td class="num">10万円</td></tr>
-            <tr><th scope="row">GOCプレミア</th><td class="num">70万円</td><td class="num">20万円</td></tr>
-            <tr><th scope="row">GGCダイヤモンド</th><td class="num">150万円</td><td class="num">30万円</td></tr>
-            <tr><th scope="row">GGCダイヤモンドメタル</th><td class="num">200万円</td><td class="num">50万円</td></tr>
+            <tr><th scope="row">クリスタル</th><td class="num">50万円</td></tr>
+            <tr><th scope="row">サファイア</th><td class="num">100万円</td></tr>
+            <tr><th scope="row">ダイヤモンド</th><td class="num">150万円</td></tr>
           </tbody>
         </table>
       </div>
 
-      <h3>② 紹介されて新規でご購入された方への報酬</h3>
-      <p class="lead">
-        ご紹介を受けて新規でご購入された方には、ステータスにかかわらず一律の報酬をお支払いします。
-      </p>
-
-      <div class="flat-fee">
-        <span class="flat-fee__label">新規ご購入者さま（ご紹介先）への報酬</span>
-        <span class="flat-fee__amount">一律 30万円 <small>（ステータス問わず）</small></span>
-      </div>
-
-      <div class="message">
-        <strong>新規ご購入者さまのリピートフィーについて</strong><br />
-        新規でご購入された方ご自身への報酬は、初回の一律30万円のみです。買い増し時のリピートフィーは、紹介者の方のみが対象となります。
-      </div>
-
-      <div class="message">
-        <strong>紹介者・ご紹介先の双方へのフィーについて</strong><br />
-        双方にメリットがある制度設計として、ご紹介者様にはステータスに応じた報酬（初回30〜200万円）を、紹介されて新規でご購入された方には一律30万円をお支払いします。
+      <div class="frame-banner">
+        <h3>双方にメリットのある設計</h3>
+        <p>ご紹介者様への還元に加え、紹介されて新規でご購入された方にも還元できる設計です。月々のご負担軽減など、紹介された方にとってのメリットもご用意できます。</p>
       </div>
 
       <div class="message">
         <strong>初回に複数件ご購入された場合の取り扱い</strong><br />
-        ご紹介先のお客様が初回のご購入で2件口（同時に2件）をご購入された場合、紹介人数は1名としてカウントし、紹介者への初回紹介フィー・新規ご購入者への一律報酬は、それぞれ1件分のみのお支払いとなります。<br />
-        その後、3件目のご購入（買い増し）からは、所定条件に基づき紹介者の方へのリピートフィーの対象となります。
+        ご紹介先のお客様が初回のご購入で2件口（同時に2件）をご購入された場合でも、紹介決済数は1件（お一人）としてカウントし、ご紹介報酬は1件分のみの適用となります。
       </div>
     </section>
 
     <section class="section" id="flow">
       <h2>ご紹介の流れ</h2>
-      <p class="lead">ご紹介から報酬発生までのイメージです。必要に応じて、ご紹介者様にも同席・ご協力をお願いしながら進めます。</p>
+      <p class="lead">ご紹介から報酬発生までのイメージです。ご紹介報酬が発生する制度のため、ご紹介者様にも積極的なご協力をお願いしながら進めます。</p>
       <div class="flow">
         <div class="flow__step">
           <span class="flow__num">STEP 1</span>
           <h4>ご紹介・事前共有</h4>
-          <p>ご家族・ご友人・同僚など、関心をお持ちの方をご紹介ください。事前に簡単なご状況共有をお願いします。</p>
+          <p>ご家族・ご友人・同僚など、関心をお持ちの方をご紹介ください。事前に簡単なご状況の共有をお願いします。</p>
         </div>
         <div class="flow__step">
           <span class="flow__num">STEP 2</span>
-          <h4>事前確認・面談実施</h4>
-          <p>当社営業担当が事前確認電話を行い、相手の温度感や反応を確認したうえで、面談・商談を実施します。必要に応じてご紹介者様にも同席・後押しのご協力をお願いする場合があります（実施1件＝1J）。</p>
+          <h4>事前確認のお電話</h4>
+          <p>当社営業担当より、ご紹介先の方へ事前確認のお電話を行い、ご関心・ご状況・温度感を確認します。そのうえで、面談・ご提案へ進むかどうかを判断します。</p>
         </div>
         <div class="flow__step">
           <span class="flow__num">STEP 3</span>
-          <h4>ご契約・決済</h4>
-          <p>ご紹介先が初めてご購入・決済された段階で、紹介者の方の初回紹介フィーと、新規ご購入者の方への一律報酬（30万円）が発生します。</p>
+          <h4>ご面談・ご提案</h4>
+          <p>ご紹介先の方との面談・ご提案を実施します。ご紹介報酬が発生する制度のため、ご紹介者様には、お声がけ・面談への同席・後押しなど、しっかりとしたご協力をお願いしております。</p>
         </div>
         <div class="flow__step">
           <span class="flow__num">STEP 4</span>
-          <h4>継続フォロー・買い増し</h4>
-          <p>ご紹介後も継続的にフォローし、3件目以降の買い増し時には、紹介者の方へのリピートフィーの対象となります。</p>
+          <h4>ご契約・決済とご還元</h4>
+          <p>ご紹介先が初めてご購入・決済された段階で「紹介決済」が成立し、ご紹介者様の会員ステータスに応じたご紹介報酬が発生します。ご紹介者様、および紹介されて新規でご購入された方へご還元します。</p>
         </div>
       </div>
     </section>
@@ -1075,17 +1062,14 @@
     <section class="section" id="notes">
       <h2>注意事項</h2>
       <ul class="notes">
-        <li>本プログラムの優遇サービスは、当社から物件をご購入いただいているオーナー会員の方が対象です。</li>
-        <li>GOCクリスタルは初回登録帯を兼ねる基本ステータスです。</li>
-        <li>会員ステータスの適用条件、各サービス内容、適用範囲および上限は、当社所定の基準に基づきます。</li>
+        <li>本プログラムは、当社で物件をご購入いただいたGOC会員の方が対象です。</li>
+        <li>会員ステータスは、ご紹介によるご成約件数（紹介決済数）の累計に応じて判定・昇格します。サファイアは、当社でのご購入3件以上でも対象となります。</li>
+        <li>ご紹介報酬は、ご紹介者様の会員ステータスに応じた金額（1件あたり）です。報酬は、ご紹介先の方が初めてご購入された時点で発生します。</li>
+        <li>ご紹介先のお客様が初回のご購入で2件口（同時に2件）をご購入された場合でも、紹介決済数は1件（お一人）としてカウントし、ご紹介報酬は1件分のみの適用となります。</li>
+        <li>各サービス内容・適用範囲・上限は、当社所定の基準に基づきます。優遇サービス一覧は現時点の案（仮）であり、今後調整となる場合があります。</li>
+        <li>ご紹介後は、当社営業担当による事前確認のお電話を行い、ご紹介先の方のご関心・ご状況・温度感を確認したうえで、面談・ご提案へ進むかどうかを判断します。</li>
+        <li>本制度はご紹介報酬が発生するため、ご紹介者様には、お声がけ・面談への同席・後押しなど、しっかりとしたご協力をお願いしております。</li>
         <li>ご紹介報酬の適用には、当社所定の条件確認が必要となります。</li>
-        <li>ご紹介者様への初回紹介フィー・リピートフィーは、ご紹介者様の会員ステータスに応じて決定します。</li>
-        <li>紹介されて新規でご購入された方には、ステータスにかかわらず一律30万円をお支払いします。買い増し時のリピートフィーは、紹介者の方のみが対象です。</li>
-        <li>ご紹介先のお客様が初回のご購入で2件口（同時に2件）をご購入された場合、紹介人数は1名、初回紹介フィーおよび新規ご購入者への一律報酬は1件分のみとなります。3件目以降の買い増しからは、紹介者の方へのリピートフィーの対象となります。</li>
-        <li>紹介人数は、決済に至った人数を基準としてカウントします。</li>
-        <li>紹介実施数（J）は、当社営業担当による事前確認電話を経て「実施」と判断された面談・商談件数を1Jとしてカウントします。面談設定のみ・日程調整のみの場合は対象外です。</li>
-        <li>実施後にローン却下となった場合でも、紹介実施数（J）には含みます。</li>
-        <li>GGCダイヤモンドおよびGGCダイヤモンドメタルの累計取引件数判定においては、ご夫婦で当社物件をお持ちの場合、所定条件のもと合算できる場合があります。</li>
         <li>紹介料は税務上、雑所得として確定申告が必要となる場合があります。詳細は税理士または所轄税務署へご確認ください。</li>
         <li>制度内容は、予告なく変更となる場合があります。</li>
       </ul>
